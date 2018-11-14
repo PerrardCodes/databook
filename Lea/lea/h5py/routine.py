@@ -40,39 +40,17 @@ def convert_files(adresse, adresse_s):
 	liste_fichier= os.listdir(adresse)
 	liste_fichier = tri_insertion(liste_fichier, adresse)
 	cine = is_cine(liste_fichier, adresse)
-	#Récupère les paramètres présents dans le fichier /Reference.txt
-	#Si le fichier n'existe pas initialise param à {}
-	#Les paramètres dans /Reference.txt sont communs au dossier
-	param = get_param(adresse)
+	p = glob.glob(adresse + "/*.txt")[0]
 	index = 1
 	#Maintenant on s'occupe à tous les fichiers présents dans le dossier
 	for file in liste_fichier:
 		#spec est une liste propre à chaque fichier
 		spec = []
 		#sont les paramètres propre à chaque fichier
-		p = {}
 		#auxquels on ajoute ceux commun au dossier
-		p.update(param)
 		#regarde si le fichier est un .cine
 		#ou s'il n'y a pas de .cine il prend les .avi
 		if(get_extention(file)=="cine" or (get_extention(file)=="avi" and not(cine))):
-			#Enlève le .cine pour ne garder que les infos importantes
-			name = file.rsplit(".", 1)
-			#parse le nom avec les _ pour récupérer les infos importantes
-			name = name[0].split('_')
-			#J'ai maintenant un tableau de string
-			for strg in name :
-				#str peut aller dans param si :
-				#str ne contient pas que des nombres
-				# str ne contient pas que des lettres
-				# et si str ne commence pas par une lettre
-				if(not(strg=="") and not(strg.isdigit()) and not(strg.isalpha()) and not(strg[0].isdigit())):
-					#Récupére les paramètres sous forme de Dictionnaire
-					#puis les update dans p
-					p.update(extract_param(strg))
-				#si ça ne peut aller dans param ça va dans spec
-				else :
-					spec.append(strg)
 			#On veut récupérer l'heure et la date
 			#Si le fichier n'a pas la date de son dossier il la prend
 			#Si le fichier n'a pas de date en titre il met alors date du fichier

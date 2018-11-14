@@ -49,7 +49,6 @@ def obj_in_h5py(object, file, group=None, point='', attr=''):
 	if type(object) in [bool, int, str, float, np.int64, np.float64]:
 		group.attrs[point] = str(attr)
 
-
 #Crée et ouvre le fichier à une certaine adresse et grace à un objet
 #Si l'adresse n'existe pas il crée la crée.
 def file_name_in_dir(object, adresse):
@@ -99,8 +98,7 @@ def h5py_in_Data(f) :
 	i = {}
 	for attr in group.attrs :
 		i[attr] = group.attrs[attr]
-	data = data.Data(d, p, spec, **i)
-	return data
+	return data.Data(d, p, spec, **i)
 
 #récupère un fichier hdf5 et crée un objet mesure
 def h5py_in_Mesure(f):
