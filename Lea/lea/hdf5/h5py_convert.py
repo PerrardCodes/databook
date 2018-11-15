@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import lea.data.Data as data
 import lea.data.Id as id
 import lea.data.Param as param
@@ -99,7 +100,7 @@ def h5py_in_Data(f) :
 	i = {}
 	for attr in group.attrs :
 		i[attr] = group.attrs[attr]
-	f.close()
+
 	return data.Data(d, p, spec, **i)
 
 #récupère un fichier hdf5 et crée un objet mesure
@@ -126,7 +127,6 @@ def h5py_in_Mesure(f):
 	if(f.__contains__("PIV3D")) :
 		p = h5py_in_piv3d(f, data)
 		m.add_measurement(p)
-	f.close()
 	return m
 
 #récupère un file hdf5, un data et crée un objet Bulles
