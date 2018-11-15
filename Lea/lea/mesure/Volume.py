@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*-
 import lea.mesure.Mesure as mesure
 import lea.mesure.pre_traitement as preT
-import fluids2d.piv as piv
+import lea.danjruth.piv as piv
 import stephane.cine.cine as cine
 import lea.hdf5.h5py_convert as lh5py
 
