@@ -100,6 +100,7 @@ def h5py_in_Data(f) :
 	for attr in group.attrs :
 		i[attr] = group.attrs[attr]
 	data = data.Data(d, p, spec, **i)
+	f.close()
 	return data
 
 #récupère un fichier hdf5 et crée un objet mesure
@@ -126,6 +127,7 @@ def h5py_in_Mesure(f):
 	if(f.__contains__("PIV3D")) :
 		p = h5py_in_piv3d(f, data)
 		m.add_measurement(p)
+	f.close()
 	return m
 
 #récupère un file hdf5, un data et crée un objet Bulles
