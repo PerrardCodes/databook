@@ -4,14 +4,18 @@ import lea.mesure.Mesure as mesure
 import lea.mesure.pre_traitement as preT
 import fluids2d.piv as piv
 import stephane.cine.cine as cine
+import lea.hdf5.h5py_convert as lh5py
 
 import matplotlib.pyplot as plt
 import glob
 import numpy as np
 import sys
+import h5py
 from functools import partial
 from multiprocessing import Process,Pool
 import os
+import cv2
+from ast import literal_eval as make_tuple
 
 
 class Volume(mesure.Mesure):
@@ -22,19 +26,55 @@ class Volume(mesure.Mesure):
     def get_name(self):
         return "Volume"
 
-    def volume(self):
+    def get_volume(self, adresse, hdf5):
+        f = lh5py.ouverture_fichier(hdf5)
+        f = f["Mesure/Volume"]
+        d = lh5py.h5py_in_Data(f)
+        c = cine.Cine(d.fichier)
+        vidcap = cv2.VideoCapture(d.fichier)
+        L = int(vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        H = int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        group = f
+        temp = {}
+        temp['instantV'] = {}
+        temp['tV'] = {}
+        for n in range(0, len(group['instantV'])) :
+            temp["instantV"][n] = group['instantV'][n].decode('UTF-8')
+        for n in range(0, len(group['tV'])) :
+            temp["tV"][n] = group['tV'][n].decode('UTF-8')
+        for i in range(0, len(temp['instantV'])):
+            un = make_tuple(temp['instantV'][i])[0]
+            deux = make_tuple(temp['instantV'][i])[1]
+            nump = np.zeros((abs(un-deux)+1,L,H))
+            for j in range(min(un, deux), max(un, deux)+1):
+                print(j)
+                nump[j-min(un,deux),...]=c.get_frame(j)
+            self.m['volume']=nump
+            self.m['t']=temp['tV'][i]
+            self.m['instant']=temp['instantV'][i]
+            file = lh5py.file_name_in_dir(self, adresse + "/Volume/")
+            lh5py.obj_in_h5py(self, file)
+            print(nump.shape)
+
+        #temp['instantV'] = group['instantV'][()]
+        #print(temp)
+
+    def volume(self, nb_im=None, nmin=5, dtmax=10):
         Dic = {}
         cinefile = self.data.fichier
         c = cine.Cine(cinefile)
         if(self.data.param.fps[len(self.data.param.fps)-1]=="k"):
-            Dic['fps'] = 1./(int(self.data.param.fps.rsplit("k",1)[0])*1000)
+            Dic['fps'] = (int(self.data.param.fps.rsplit("k",1)[0])*1000)
         else :
-            Dic['fps'] = 1./self.data.param.fps
+            Dic['fps'] = int(self.data.param.fps)
         #detecte les débuts et fin de Volumes
         #ft = 1./40000 #should be given directly by Data.param.ft
-        Dic['dtmin'] = 10*Dic['fps']#we look for jumps at least 10 times Dt
-        Dic['dtmax'] = 10 #value in second
-        Dic['N'] = 1000#len(c)
+        Dic['dtmin'] = nmin*Dic['fps']#we look for jumps at least 10 times Dt
+        Dic['dtmax'] = dtmax #value in second
+        if(nb_im==None):
+            Dic['N']=len(c)
+        else :
+            Dic['N'] = nb_im
         instant = self.find_timejumps(c, Dic)
 
         Dic['Nz'] = 20

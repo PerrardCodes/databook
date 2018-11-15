@@ -3,7 +3,7 @@ import lea.mesure.Contour as contour
 import lea.mesure.Bulles as bulles
 import lea.mesure.Piv3D as piv
 import lea.mesure.Mesure as mesure
-import lea.h5py.h5py_convert h5py
+import lea.hdf5.h5py_convert h5py
 
 import os
 import glob
