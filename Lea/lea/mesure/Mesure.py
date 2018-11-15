@@ -1,5 +1,5 @@
 import lea.data.Data
-import lea.mesure.pre_traitement
+import lea.mesure.pre_traitement as preT
 import lea.display.graphes as graphes
 
 import matplotlib.pyplot as plt
@@ -37,7 +37,7 @@ class Mesure:
 
 	def get_im(self, object, i):
 		if(object.data.extension in ['tif', 'png', 'jpg']):
-			im = get_im_files(object.data.fichier, i, self.data.extension)
+			im = preT.get_im_files(object.data.fichier, i, self.data.extension)
 		elif(object.data.extension in ['cine', 'avi']):
-			im = get_im_video(object.data.fichier, i)
+			im = preT.get_im_video(object.data.fichier, i)
 		return im

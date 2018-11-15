@@ -1,4 +1,4 @@
-import lea.mesure.Mesure as m
+import lea.mesure.Mesure as mesure
 import lea.mesure.pre_traitement as pre
 import lea.danjruth.piv as p
 
@@ -8,9 +8,9 @@ from multiprocessing import Process, Pool
 import os
 import numpy as np
 
-class Piv3D(m.Mesure):
+class Piv3D(mesure.Mesure):
     def __init__(self, data, m={}):
-        Mesure.__init__(self, data)
+        mesure.Mesure.__init__(self, data)
         self.m=m
 
     def analysis(self, parent_folder, cine_name, adresse_s, npy=None, fx=1., dt_origin="", \
@@ -18,6 +18,14 @@ class Piv3D(m.Mesure):
                 window_size=32, overlap=16, search_area_size=32,\
                 save=True, s2n_thresh=1.2, bg_n_frames=None, a_frames=""):
 
+        param = self.data.param
+        if(hasattr(param, "fx")):
+            fx = float(param.fx)
+        if(hasattr(param, "fps")):
+            fps = int(param.fps)
+        if(hasattr(param, "f")):
+            f = int(param.f[:-2])
+        frame_diff = fps/f
         #Crée un objet processing présent dans : danjruth.piv
         processing = p.PIVDataProcessing(parent_folder, cine_name, name_for_save=adresse_s, dx=fx, dt_orig=dt_origin,\
                                         frame_diff=frame_diff, crop_lims=crop_lims, maskers=maskers,\
