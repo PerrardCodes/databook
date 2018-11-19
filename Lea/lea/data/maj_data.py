@@ -8,10 +8,13 @@ import lea.mesure.Volume as lvolume
 
 import lea.hdf5.h5py_convert as h5pylea
 
+import stephane.analysis.cdata as cdata
 
 import os
 import glob
 import time
+
+import numpy as np
 
 import sys
 
@@ -42,7 +45,27 @@ def ask(folder,ext='*.cine'):
         else:
             print('no file found in '+folder)
             return None
-### CHarge un fichier Data## .
+            
+def get_param_right(s,unit):
+    if len(unit)>0:
+        s = s.rsplit(unit,1)[0]
+
+    table = {'k':1000,'m':0.001,'c':0.01}    
+    for key in table.keys():
+        if key in s:
+            return float(s.rsplit(key,1)[0])*table[key]
+        else:
+            return float(s)
+            
+def update_param(param):
+    paramlist = {'fps':'','f':'Hz','fx':'','l_c':''}
+    
+    for key in paramlist.keys():
+        s = getattr(param,key)
+        val = get_param_right(s,unit=paramlist[key])
+        setattr(param,key,val)
+    return param
+
 
 date = "20181106"
 savefolder = '/Users/stephane/Documents/JRC_ENS/Data/Turbulence3d/'+date+'/'
@@ -65,6 +88,8 @@ f.close()
 param = lparam.Param(p=paramfile,spec=cinefile)
 print(param.__dict__.keys())
 
+param = update_param(param)
+
 #update le fichier param du data
 Data.param = param 
 
@@ -82,7 +107,7 @@ v = lvolume.Volume(Data)
 v = v.volume(nb_im=100)
 
 #print(v.m['instantV'][0])
-#stophere
+#save the first volume position. Works for movies without time jump
 setattr(Data.param,'startV',v.m['instantV'][0][0])
 setattr(Data.param,'endV',v.m['instantV'][0][1])
 setattr(Data.param,'tV',v.m['tV'][0])
@@ -91,3 +116,37 @@ setattr(Data.param,'tV',v.m['tV'][0])
 f = h5pylea.file_name_in_dir(Data, savefolder)
 h5pylea.obj_in_h5py(Data,f)
 f.close()
+
+print('Data object saved')
+
+#cree un mesure à partir d'un fichier hdf5 existant
+mesurefile = ask(folder,ext='/Mesure*'+os.path.basename(cinefile).rsplit(".",1)[0]+'.hdf5')
+
+f = h5pylea.ouverture_fichier(mesurefile)
+M = h5pylea.h5py_in_Mesure(f)
+f.close()
+
+print('Mesure object loaded')
+if 'U' in M.PIV3D.m.keys():
+    print('U format')
+
+    print(M.PIV3D.m['U'].shape)
+if 'np' in M.PIV3D.m.keys():
+    print('np format')
+    print(M.PIV3D.m['np'].shape)
+
+#update le Data du Mesure
+M.data = Data
+M.PIV3D.data = Data
+print(M.data.param.__dict__)
+
+#update field name
+if 'np' in M.PIV3D.m.keys():
+    M.PIV3D.m['U'] = M.PIV3D.m['np']
+    M.PIV3D.m.pop('np')
+
+#sauvegarde le fichier Mesure
+f = h5pylea.file_name_in_dir(M, savefolder,overwrite=True)
+h5pylea.obj_in_h5py(M,f)
+f.close()
+

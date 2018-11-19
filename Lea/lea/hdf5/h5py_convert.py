@@ -52,7 +52,7 @@ def obj_in_h5py(object, file, group=None, point='', attr=''):
 
 #Crée et ouvre le fichier à une certaine adresse et grace à un objet
 #Si l'adresse n'existe pas il crée la crée.
-def file_name_in_dir(object, adresse):
+def file_name_in_dir(object, adresse,overwrite=False):
 	if not(os.path.exists(adresse)):
 		os.makedirs(adresse)
 	if(object.get_name()=="Data"):
@@ -60,6 +60,8 @@ def file_name_in_dir(object, adresse):
 	else:
 		name = str(object.data.id.date) + '_' + str(object.data.id.index) + '_' +  object.data.fichier.rsplit("/", 1)[1].split(".")[0] + ".hdf5"
 		count = len(glob.glob(adresse + "/Mesure_*" +name))
+		if overwrite and count>0:
+		    count = count - 1
 		name = "Mesure_" + str(count) + "_" + name
 	#Crée le fichier avec w, si le fichier existe le supprime
 	f = h5py.File(adresse + "/" + name, "w")
@@ -90,7 +92,12 @@ def h5py_in_Data(f) :
 	group = f['Data/Param']
 	p = {}
 	for attr in group.attrs :
-		p[attr] = group.attrs[attr]
+	   try:
+	       p[attr] = float(group.attrs[attr])
+	   except:
+	       print(str(attr) + 'cannot be converted to a number')
+	       p[attr] = str(group.attrs[attr])
+
 	s = group.get("spec")
 	spec = []
 	if(s!=None):
@@ -165,10 +172,10 @@ def h5py_in_piv3d(f, data):
 	m={}
 	#temp={}
 	for attr in group_p :
-		if(isinstance(group_p[attr], h5py.Dataset)) :
-			m['np'] = group_p[attr][()]
+	   if(isinstance(group_p[attr], h5py.Dataset)) :
+	       m['U'] = group_p[attr][()]
 	for attr in group_p.attrs:
-		m[attr] = group_p.attrs[attr]
+	   m[attr] = group_p.attrs[attr]
 	#df = pd.DataFrame(data=temp)
 	#m["DF"] = df
 	b = piv.Piv3D(data, m=m)

@@ -63,9 +63,12 @@ class Volume(mesure.Mesure):
         Dic = {}
         cinefile = self.data.fichier
         c = cine.Cine(cinefile)
-        if(self.data.param.fps[len(self.data.param.fps)-1]=="k"):
-            Dic['fps'] = (int(self.data.param.fps.rsplit("k",1)[0])*1000)
-        else :
+        if type(self.data.param.fps) == type(str):
+            if(self.data.param.fps[len(self.data.param.fps)-1]=="k"):
+                Dic['fps'] = (int(self.data.param.fps.rsplit("k",1)[0])*1000)
+            else :
+                Dic['fps'] = int(self.data.param.fps)
+        else:
             Dic['fps'] = int(self.data.param.fps)
         #detecte les débuts et fin de Volumes
         #ft = 1./40000 #should be given directly by Data.param.ft
