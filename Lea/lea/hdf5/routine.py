@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import lea.data.Data as data
 import lea.hdf5.h5py_convert as lh5py
 
@@ -89,7 +88,7 @@ def convert_dir(adresse, adresse_s):
 	heure = time.strftime("%H%M" , time.localtime(os.path.getmtime(adresse)))
 	d = data.Data(adresse, param, spec, index=1, date=date, heure=heure)
 	print(d.fichier)
-	lh5py.obj_in_h5py(d, lh5py.file_name_in_dir(d, adresse_s))
+	h5py.obj_in_h5py(d, lh5py.file_name_in_dir(d, adresse_s))
 
 def tiff(adresse):
 	if not os.listdir(adresse) :
@@ -166,10 +165,8 @@ def errase_dir(ref):
 #convert_arbo("/media/ldupuy/Chicago2/Experiments_Princeton", "/home/ldupuy/Documents/Stage_Python_(2018)/new/Experiments_Princeton_hdf5/")
 #errase_dir("/home/ldupuy/Documents/Stage_Python_(2018)/new/Experiments_Princeton_hdf5")
 if __name__ == '__main__':
-    ref = '/Volumes/Diderot/DATA_MSC_Jamin/Turbulence3d' 
-    adresse_s = ref        
-	#ref = '/home/dini/Documents/Stage_Stephane_2018'
-	#adresse_s = '/home/dini/Documents/Stage_Stephane_2018'
+	ref = '/home/dini/Documents/Stage_Stephane_2018'
+	adresse_s = '/home/dini/Documents/Stage_Stephane_2018'
 	#ref = "/media/stephane/OS/Documents and Settings/Stephane/Documents/Data_buffer/20181010"
 	#adresse_s = '/media/stephane/DATA/Experimental_data/Turbulence3d/20181010'
-    convert_arbo(ref, adresse_s)
+	convert_arbo(ref, adresse_s)

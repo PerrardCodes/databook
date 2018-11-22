@@ -50,11 +50,13 @@ class Volume(mesure.Mesure):
                 print(j)
                 nump[j-min(un,deux),...]=c.get_frame(j)
             self.m['volume']=nump
-            self.m['t']=temp['tV'][i]
-            self.m['instant']=temp['instantV'][i]
-            file = lh5py.file_name_in_dir(self, adresse + "/Volume/")
+            self.m['tV']=temp['tV'][i]
+            self.m['instantV']=temp['instantV'][i]
+            file = lh5py.file_name_in_dir(self, adresse + "/Volume/" + os.path.basename(hdf5) + "/")
             lh5py.obj_in_h5py(self, file)
+            file.close()
             print(nump.shape)
+            del nump
 
         #temp['instantV'] = group['instantV'][()]
         #print(temp)
@@ -63,12 +65,9 @@ class Volume(mesure.Mesure):
         Dic = {}
         cinefile = self.data.fichier
         c = cine.Cine(cinefile)
-        if type(self.data.param.fps) == type(str):
-            if(self.data.param.fps[len(self.data.param.fps)-1]=="k"):
-                Dic['fps'] = (int(self.data.param.fps.rsplit("k",1)[0])*1000)
-            else :
-                Dic['fps'] = int(self.data.param.fps)
-        else:
+        if(self.data.param.fps[len(self.data.param.fps)-1]=="k"):
+            Dic['fps'] = (int(self.data.param.fps.rsplit("k",1)[0])*1000)
+        else :
             Dic['fps'] = int(self.data.param.fps)
         #detecte les débuts et fin de Volumes
         #ft = 1./40000 #should be given directly by Data.param.ft
@@ -147,7 +146,7 @@ class Volume(mesure.Mesure):
         if(True):
             C = []
             print(start)
-            for j in range(start,end):
+            for j in range(start,end-1):
                 print("image : " + str(j))
                 im = c.get_frame(j)
                 im1 = c.get_frame(j+1)
