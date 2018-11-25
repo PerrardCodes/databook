@@ -6,6 +6,7 @@ import lea.mesure.Mesure as mesure
 import lea.mesure.Contour as contour
 import lea.mesure.Bulles as bulles
 import lea.mesure.Piv3D as piv
+import lea.mesure.Volume as volume
 
 import numpy as np
 import h5py
@@ -130,6 +131,15 @@ def h5py_in_Mesure(f):
 	return m
 
 #récupère un file hdf5, un data et crée un objet Bulles
+def key(f):
+    return [key for key in f.keys()]
+
+def h5py_in_obj(f,data=None):
+    keys = key(f)
+    if 'Volume' in keys:
+        return h5py_in_Volume(f) 
+
+
 def h5py_in_Bulles(f, data):
 	group_b = f['Bulles']
 	m={}
@@ -144,6 +154,22 @@ def h5py_in_Bulles(f, data):
 	m["DF"] = df
 	b = bulles.Bulles(data, m=m)
 	return b
+	
+def h5py_in_Volume(f):
+	group_v = f['Volume']
+	m={}
+	for attr in group_v :
+		if(isinstance(group_v[attr], h5py.Dataset)) :
+			m['volume'] = group_v[attr][()]
+	for attr in group_v.attrs:
+		m[attr] = group_v.attrs[attr]
+	#df = pd.DataFrame(data=temp)
+	#m["DF"] = df
+	f = f['Volume']
+	data = h5py_in_Data(f)
+	
+	v = volume.Volume(data, m=m)
+	return v
 
 #récupére un file hdf5, un data et crée un objet Contour
 def h5py_in_Contour(f, data):

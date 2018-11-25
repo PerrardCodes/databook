@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
 import lea.mesure.Mesure as mesure
 import lea.mesure.pre_traitement as pre
 import lea.danjruth.piv as p
+
+import lea.danjruth.piv_volume as p3d
 
 
 from functools import partial
@@ -28,6 +31,36 @@ class Piv3D(mesure.Mesure):
         frame_diff = fps/f
         #Crée un objet processing présent dans : danjruth.piv
         processing = p.PIVDataProcessing(parent_folder, cine_name, name_for_save=adresse_s, dx=fx, dt_orig=dt_origin,\
+                                        frame_diff=frame_diff, crop_lims=crop_lims, maskers=maskers,\
+                                        window_size=window_size, overlap=16, search_area_size=search_area_size)
+        #ajoute à m ce qu'il a dans l'objet processing
+        self.m.update(processing.__dict__)
+        #Si npy n'est pas donné en paramètre il lance l'analyse sur l'objet
+        if(npy==None):
+            flowfield = processing.run_analysis(a_frames=a_frames, save=save, s2n_thresh=s2n_thresh, bg_n_frames=bg_n_frames)
+        #Sinon il load juste le npy dans m
+        else :
+            self.m['U'] = np.load(npy)
+
+        return flowfield
+        
+
+    def analysis3d(self, parent_folder, cine_name,volume_folder, adresse_s, npy=None, fx=1., dt_origin="", \
+                frame_diff="", crop_lims=None, maskers=None,\
+                window_size=32, overlap=16, search_area_size=32,\
+                save=True, s2n_thresh=1.2, bg_n_frames=None, a_frames=""):
+
+        param = self.data.param
+        if(hasattr(param, "fx")):
+            fx = float(param.fx)
+        if(hasattr(param, "fps")):
+            fps = int(param.fps)
+        if(hasattr(param, "f")):
+            f = int(param.f[:-2])
+        frame_diff = fps/f
+        
+        #Crée un objet processing présent dans : danjruth.piv
+        processing = p3d.PIVDataProcessing(parent_folder, cine_name, volume_folder, name_for_save=adresse_s, dx=fx, dt_orig=dt_origin,\
                                         frame_diff=frame_diff, crop_lims=crop_lims, maskers=maskers,\
                                         window_size=window_size, overlap=16, search_area_size=search_area_size)
         #ajoute à m ce qu'il a dans l'objet processing
