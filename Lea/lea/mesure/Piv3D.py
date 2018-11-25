@@ -104,7 +104,7 @@ class Piv3D(mesure.Mesure):
 
 
     def add_measurement(self, obj, name):
-        setattr(self, obj, name)
+        setattr(self, name, obj)
 
     def get_name(self):
         return "PIV3D"

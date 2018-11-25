@@ -7,9 +7,9 @@ Created on Fri Aug 25 12:18:54 2017
 
 import pims
 import numpy as np
-import openpiv.process
-import openpiv.validation
-import openpiv.filters
+import openpiv_SP.process as process
+import openpiv_SP.validation as validation
+import openpiv_SP.filters as filters
 import matplotlib.pyplot as plt
 import matplotlib.patches
 import pickle
@@ -31,13 +31,13 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 class PIVDataProcessing:
     '''
-    Class for PIV computations for a cine.
+    Class for PIV computations on volumetric data
     '''
 
     def __init__(self,parent_folder,cine_name,volume_folder,window_size=32,overlap=16,search_area_size=64,frame_diff=1,name_for_save=None,maskers=None,crop_lims=None,dx=1,dt_orig=1):
 
         # Metadata
-        self.cine_filepath = parent_folder+cine_name+'.cine'
+        self.cine_filepath = parent_folder+cine_name#+'.cine'
         self.parent_folder=parent_folder
         self.cine_name=cine_name
         self.volume_folder=volume_folder
@@ -68,9 +68,9 @@ class PIVDataProcessing:
             
         #load the volumes
         self.volume_folder = volume_folder
-        self.load_volumes()
-        
-        print(len(self.Vlist))
+
+ #       self.load_volumes()       
+ #       print(len(self.Vlist))
         
     def load_volumes(self):
         l = glob.glob(self.volume_folder+'Mesure*.hdf5')
@@ -80,20 +80,126 @@ class PIVDataProcessing:
             f = h5pylea.ouverture_fichier(filename)
             self.Vlist.append(h5pylea.h5py_in_Volume(f))
             f.close()
-
-    def save(self):
-        self.ff = None # So the actual flowfield isn't stored in this pickled object
-        pickle.dump(self,open(self.parent_folder+self.name_for_save+'.pkl','wb'))
+            
+    def get_volume(self,i):
+        l = glob.glob(self.volume_folder+'Mesure*.hdf5')        
+        
+        if i<len(l):
+            f = h5pylea.ouverture_fichier(l[i])
+            volume = h5pylea.h5py_in_Volume(f)
+            f.close() 
+        else:
+            print('index '+str(i)+' out of range')
+              
+        return volume         
 
     def process_frame(self,frame_a,frame_b,s2n_thresh=1.3):
         frame_a = frame_a.astype(np.int32)
         frame_b = frame_b.astype(np.int32)
 
-        u,v,sig2noise = openpiv.process.extended_search_area_piv( frame_a, frame_b, window_size=self.window_size, overlap=self.overlap, dt=1, search_area_size=self.search_area_size,sig2noise_method='peak2peak' )
-        u, v, mask = openpiv.validation.sig2noise_val( u, v, sig2noise, threshold = s2n_thresh )
+        u,v,sig2noise = process.extended_search_area_piv( frame_a, frame_b, window_size=self.window_size, overlap=self.overlap, dt=1, search_area_size=self.search_area_size,sig2noise_method='peak2peak' )
+        #u, v, mask = validation.sig2noise_val( u, v, sig2noise, threshold = s2n_thresh )
 
         return u,v
+    def volume_analysis(self,i,dt=2):
         
+        #axis order by default : z,x,y. The z axis correspond to the scanning axis
+        
+        #load the two volumes in memory
+        volume_a = self.get_volume(i).m['volume']
+        volume_b = self.get_volume(i+dt).m['volume']
+        
+        Nz,Nx,Ny = volume_a.shape
+                
+        ##### process along xy #####
+        print('Process along xy')
+        window_size = [32,32]
+        overlap = [16,16]
+        frame_shape = (Nx,Ny)
+        
+        nx,ny = process.get_field_shape(frame_shape,window_size,overlap)
+
+        startz = (volume_a.shape[0]%16)//2 #reste dans la division par 16
+        endz = startz+16
+        zlist = range(startz,endz)
+        nz = len(zlist)
+        
+        print(nz,nx,ny)
+        
+        Ux_3d = np.zeros((nz,nx,ny))
+        Uy_3d = np.zeros((nz,nx,ny))
+        
+        for l,z in enumerate(zlist):
+            frame_a = volume_a[z,...].astype(np.int32)
+            frame_b = volume_b[z,...].astype(np.int32)
+        
+            u,v,sig2noise = process.extended_search_area_piv(frame_a, frame_b, window_size=window_size, overlap=overlap, dt=dt, search_area_size=window_size,sig2noise_method='peak2peak' )
+
+            Uy_3d[l,...] = u
+            Ux_3d[l,...] = v
+            
+        #### process along xz ####
+        print('Process along xz')
+
+        window_size = [16,32]
+        overlap = [8,16]
+        frame_shape = (Nz,Nx)
+        a=2 #for the smoothing operation along y
+        
+        nz,nx = process.get_field_shape(frame_shape,window_size,overlap)
+        ylist = range(a,Ny-a)
+        ny = len(ylist)
+        print(nz,nx,ny)
+        
+        Ux_xz = np.zeros((nx,ny))
+        Uz_xz = np.zeros((nx,ny))
+    
+        for k,y in enumerate(ylist):
+            frame_a = np.nanmean(volume_a[startz:endz,:,y-a:y+a+1],axis=2).astype(np.int32)
+            frame_b = np.nanmean(volume_b[startz:endz,:,y-a:y+a+1],axis=2).astype(np.int32)
+            
+            u,v,sig2noise = process.extended_search_area_piv(frame_a, frame_b, window_size=window_size, overlap=overlap, dt=1, search_area_size=window_size,sig2noise_method='peak2peak' )
+    
+            Ux_xz[:,k] = -u[0,:] #Why this minus sign ? unclear for now. Might be due to the filling of the matrix.
+            Uz_xz[:,k] = v[0,:]
+            
+        ### process along yz ###
+        print('Process along yz')
+
+        window_size = [16,32]
+        overlap = [8,16]
+        frame_shape = (Nz,Ny)
+        a=2 #for the smoothing operation along y
+        
+        nz,ny = process.get_field_shape(frame_shape,window_size,overlap)
+        xlist = range(a,Nx-a)
+        nx = len(xlist)
+        print(nz,nx,ny)
+        
+        Uy_yz = np.zeros((nx,ny))
+        Uz_yz = np.zeros((nx,ny))
+
+        for k,x in enumerate(xlist):
+            frame_a = np.nanmean(volume_a[startz:endz,x-a:x+a+1,:],axis=1).astype(np.int32)
+            frame_b = np.nanmean(volume_b[startz:endz,x-a:x+a+1,:],axis=1).astype(np.int32)
+            
+            u,v,sig2noise = process.extended_search_area_piv(frame_a, frame_b, window_size=window_size, overlap=overlap, dt=1, search_area_size=window_size,sig2noise_method='peak2peak' )
+    
+            Uy_yz[k,:] = u[0,:] #Why this minus sign ? unclear for now. Might be due to the filling of the matrix.
+            Uz_yz[k,:] = v[0,:]
+
+        self.Ux_3d = Ux_3d
+        self.Uy_3d = Uy_3d
+        
+        self.Ux_xz = Ux_xz
+        self.Uz_xz = Uz_xz
+
+        self.Uy_yz = Uy_yz
+        self.Uz_yz = Uz_yz
+        
+        return self
+        
+            
     def run_analysis(self,a_frames=None,a_volumes=None,zaxis=0,directions=[1,2],save=True,s2n_thresh=1.3,bg_n_frames=None):
         #run piv analysis on 384 or 1024 "frames"
         
@@ -146,7 +252,7 @@ class PIVDataProcessing:
         '''
         Store some processing parameters
         '''
-        self.window_coordinates = openpiv.process.get_coordinates(shape,self.window_size,self.overlap)
+        self.window_coordinates = process.get_coordinates(shape,self.window_size,self.overlap)
         self.s2n_thresh=s2n_thresh # threshold used in PIV analysis
         self.a_volumes=a_volumes # which original frames are the "a" frames
         self.dt_ab = self.dt_orig*self.frame_diff # dt between frames a and b
@@ -198,8 +304,8 @@ class PIVDataProcessing:
             # run the PIV analysis
             
 #            u,v = process_frame(self,frame_a,frame_b,s2n_thresh=1.3):
-                u,v,sig2noise = openpiv.process.extended_search_area_piv( frame_a, frame_b, window_size=self.window_size, overlap=self.overlap, dt=1, search_area_size=self.search_area_size,sig2noise_method='peak2peak' )
-                u, v, mask = openpiv.validation.sig2noise_val( u, v, sig2noise, threshold = s2n_thresh )
+                u,v,sig2noise = process.extended_search_area_piv( frame_a, frame_b, window_size=self.window_size, overlap=self.overlap, dt=1, search_area_size=self.search_area_size,sig2noise_method='peak2peak' )
+                u, v, mask = validation.sig2noise_val( u, v, sig2noise, threshold = s2n_thresh )
 
             # store the velocity fields
                 flow_field[aii,:,:,0] = u
@@ -376,7 +482,7 @@ def init_flowfield(num_frames,frame_shape,window_size,overlap):
     '''
     Initialize the 4d numpy array to store the flow field
     '''
-    field_shape = openpiv.process.get_field_shape(frame_shape,window_size,overlap)
+    field_shape = process.get_field_shape(frame_shape,window_size,overlap)
     flow_field = np.zeros([num_frames,field_shape[0],field_shape[1],2]) # [frame, row, column, velocity component]
     return flow_field
 
