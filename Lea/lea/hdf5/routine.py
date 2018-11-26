@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import lea.data.Data as data
 import lea.hdf5.h5py_convert as lh5py
 
@@ -71,13 +72,13 @@ def convert_files(adresse, adresse_s):
 					date = str(dir)
 			#On a tous ce qui est nécessaire à la création de Data
 			d = data.Data(adresse + "/" + file, p, spec, index=index, date=date, heure=heure)
-			h5py.obj_in_h5py(d, lh5py.file_name_in_dir(d, adresse_s))
+			lh5py.obj_in_h5py(d, lh5py.file_name_in_dir(d, adresse_s))
 			index +=1
 		elif(get_extention(file) in ["tif", "jpeg", "png"]):
 			date = time.strftime("%Y%m%d" , time.localtime(os.path.getmtime(adresse + "/" + file)))
 			heure = time.strftime("%H%M" , time.localtime(os.path.getmtime(adresse+ "/" + file)))
 			d = data.Data(adresse + "/" + file, p, spec, index=index,date=date, heure=heure)
-			h5py.obj_in_h5py(d, lh5py.file_name_in_dir(d, adresse_s))
+			lh5py.obj_in_h5py(d, lh5py.file_name_in_dir(d, adresse_s))
 			index+=1
 
 
@@ -88,7 +89,7 @@ def convert_dir(adresse, adresse_s):
 	heure = time.strftime("%H%M" , time.localtime(os.path.getmtime(adresse)))
 	d = data.Data(adresse, param, spec, index=1, date=date, heure=heure)
 	print(d.fichier)
-	h5py.obj_in_h5py(d, lh5py.file_name_in_dir(d, adresse_s))
+	lh5py.obj_in_h5py(d, lh5py.file_name_in_dir(d, adresse_s))
 
 def tiff(adresse):
 	if not os.listdir(adresse) :
@@ -165,8 +166,11 @@ def errase_dir(ref):
 #convert_arbo("/media/ldupuy/Chicago2/Experiments_Princeton", "/home/ldupuy/Documents/Stage_Python_(2018)/new/Experiments_Princeton_hdf5/")
 #errase_dir("/home/ldupuy/Documents/Stage_Python_(2018)/new/Experiments_Princeton_hdf5")
 if __name__ == '__main__':
-	ref = '/home/dini/Documents/Stage_Stephane_2018'
-	adresse_s = '/home/dini/Documents/Stage_Stephane_2018'
+	#ref = '/home/dini/Documents/Stage_Stephane_2018'
+	#adresse_s = '/home/dini/Documents/Stage_Stephane_2018'
+	ref = '/Volumes/Diderot/DATA_Princeton_November2018/20181126'
+	adresse_s= '/Users/stephane/Documents/Postdoc_Princeton/Piv3d/20181106'
+
 	#ref = "/media/stephane/OS/Documents and Settings/Stephane/Documents/Data_buffer/20181010"
 	#adresse_s = '/media/stephane/DATA/Experimental_data/Turbulence3d/20181010'
 	convert_arbo(ref, adresse_s)

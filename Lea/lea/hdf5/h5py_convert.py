@@ -191,10 +191,12 @@ def h5py_in_piv3d(f, data):
 	m={}
 	#temp={}
 	for attr in group_p :
-		if(isinstance(group_p[attr], h5py.Dataset)) :
-			m['np'] = group_p[attr][()]
+	   is_dataset = isinstance(group_p[attr], h5py.Dataset)
+	   if(is_dataset):
+	       m[attr] = group_p[attr][()]
+
 	for attr in group_p.attrs:
-		m[attr] = group_p.attrs[attr]
+	   m[attr] = group_p.attrs[attr]
 	#df = pd.DataFrame(data=temp)
 	#m["DF"] = df
 	b = piv.Piv3D(data, m=m)

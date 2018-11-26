@@ -9,6 +9,8 @@ import os
 
 tab = {}
 #20181106
+#table to get the correspondance between fichier and parameter files
+
 tab[0] = {"fichier":"/media/stephane/DATA/Experimental_data/Turbulence3d/20181106/PIV3d_nikon50mm_64pumps_random16_fps40k_Pump30Hz_f1kHz_A1600mV_line5.cine", "param" : "/media/stephane/DATA/Experimental_data/Turbulence3d/20181106/PIV3dscan_nikon50mm_param.txt"}
 tab[1] = {"fichier":"/media/stephane/DATA/Experimental_data/Turbulence3d/20181106/PIV3d_nikon50mm_64pumps_random16_fps40k_Pump30Hz_f1kHz_A1600mV_line5_z450mm.cine", "param" : "/media/stephane/DATA/Experimental_data/Turbulence3d/20181106/PIV3dscan_nikon50mm_param.txt"}
 tab[2] = {"fichier":"/media/stephane/DATA/Experimental_data/Turbulence3d/20181106/PIV3d_nikon50mm_64pumps_random16_fps40k_Pump30Hz_f800Hz_A1600mV_line5_z400mm.cine", "param" : "/media/stephane/DATA/Experimental_data/Turbulence3d/20181106/PIV3dscan_nikon50mm_param.txt"}

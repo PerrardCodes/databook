@@ -14,7 +14,27 @@ import numpy as np
 class Piv3D(mesure.Mesure):
     def __init__(self, data, m={}):
         mesure.Mesure.__init__(self, data)
+        
+        # load default parameters for the piv
+        #self.load_piv_parameters()
+        
         self.m=m
+
+    def load_piv_parameters(self):
+        param = self.data.param
+        if(hasattr(param, "fx")):
+            self.fx = float(param.fx)
+        if(hasattr(param, "galvo")):
+            if param.galvo[-1]=='k':
+                self.f = int(param.galvo[:-1])*1000
+        if(hasattr(param, "fps")):
+            if param.fps[-1]=='k':
+                self.fps = int(param.fps[:-1])*1000
+        
+        self.frame_diff = int(self.fps/self.f)
+        self.dt_origin = 1./self.frame_diff
+
+
 
     def analysis(self, parent_folder, cine_name, adresse_s, npy=None, fx=1., dt_origin="", \
                 frame_diff="", crop_lims=None, maskers=None,\
@@ -22,13 +42,8 @@ class Piv3D(mesure.Mesure):
                 save=True, s2n_thresh=1.2, bg_n_frames=None, a_frames=""):
 
         param = self.data.param
-        if(hasattr(param, "fx")):
-            fx = float(param.fx)
-        if(hasattr(param, "fps")):
-            fps = int(param.fps)
-        if(hasattr(param, "f")):
-            f = int(param.f[:-2])
-        frame_diff = fps/f
+        
+        frame_diff = self.fps/self.f
         #Crée un objet processing présent dans : danjruth.piv
         processing = p.PIVDataProcessing(parent_folder, cine_name, name_for_save=adresse_s, dx=fx, dt_orig=dt_origin,\
                                         frame_diff=frame_diff, crop_lims=crop_lims, maskers=maskers,\
@@ -79,25 +94,36 @@ class Piv3D(mesure.Mesure):
         self.m['U'] = np.load(npy)
 
     def analysis_multi_proc(self, parent_folder, cine_name, adresse_s, npy=None, fx=1., dt_origin="", frame_diff="", crop_lims=None, maskers=None, window_size=32, overlap=16, search_area_size=32,save=True, s2n_thresh=1.2, bg_n_frames=None):
+        #frame_diff = self.frame_diff
+        #fx = self.fx
+        #dt_origin = self.dt_origin
+        self.load_piv_parameters()
+        
+        frame_diff = self.frame_diff
+        
+        print(frame_diff)
         Ncpu = os.cpu_count()
         with Pool(processes=Ncpu) as pool:
             ite = []
             for i in range(frame_diff):
-                ite.append(np.arange(i, self.data.nb_im-frame_diff, frame_diff))
+                #self.data.nb_im
+                ite.append(np.arange(i,self.data.nb_im-frame_diff, frame_diff))
 	        #ite = [(0,25), (26, 50), (51, 75), (76, 100)]
-            func = partial(self.analysis, parent_folder, cine_name, adresse_s, npy, fx, dt_origin,frame_diff, crop_lims, maskers, window_size, overlap, search_area_size, save, s2n_thresh, bg_n_frames)
+            func = partial(self.analysis, parent_folder, cine_name, adresse_s, npy, self.fx, self.dt_origin,frame_diff, crop_lims, maskers, window_size, overlap, search_area_size, save, s2n_thresh, bg_n_frames)
             f = pool.map(func, ite)
 
+            print(len(f))
+#            stophere
             #get the image shape and the number of images processed by cpu from the output
             N=0
-            for i in range(Ncpu):
+            for i in range(frame_diff):
                 dim = f[i].shape
                 N += dim[0]
             dimensions = (N,)+dim[1:] #assume all the images have the same shape
             flowfield = np.zeros(dimensions)
 
-            for i in range(Ncpu):
-                flowfield[i:N:Ncpu,...]=f[i]
+            for i in range(frame_diff):
+                flowfield[i:N:frame_diff,...]=f[i]
             np.save(parent_folder+adresse_s+'_flowfield.npy',flowfield)
         self.m['U'] = flowfield
         return self

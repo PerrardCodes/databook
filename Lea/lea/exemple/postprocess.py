@@ -24,6 +24,7 @@ def os_base():
         base = '/media/stephane/DATA'
     if sys.platform=='darwin':
         base = '/Volumes/Diderot/DATA_MSC_Jamin/'    
+        base = '/Users/stephane/Documents/Postdoc_Princeton/Piv3d/'#'/Volumes/Diderot/DATA_Princeton_November2018/'
     return base
 
 def ask(folder,ext='*.cine'):
@@ -55,16 +56,24 @@ def nancount(data):
 ### CHarge un fichier Data## .
 ### CHarge un fichier Data## .
 
-date = "20181106"
-savefolder = '/Users/stephane/Documents/JRC_ENS/Data/Turbulence3d/'+date+'/'
+date = "20181126"
+savefolder = '/Users/stephane/Documents/Postdoc_Princeton/Piv3d/'+date
 
 base = os_base()
-folder = base+'Turbulence3d/'+date+'/'
+folder = base+date+'/'
 cinefile = ask(folder)
-datafile = ask(folder,ext='/20*'+os.path.basename(cinefile).rsplit(".",1)[0]+'.hdf5')
-#paramfile = ask(folder,ext='*.txt')
-mesurefile = ask(folder,ext='/Mesure*'+os.path.basename(cinefile).rsplit(".",1)[0]+'.hdf5')
+#cinefile = None
+if cinefile is not None:
+    datafile = ask(folder,ext='/20*'+os.path.basename(cinefile).rsplit(".",1)[0]+'.hdf5')
+else:
+    datafile = ask(folder,ext='20*'+'.hdf5')
 
+#paramfile = ask(folder,ext='*.txt')
+if cinefile is not None:
+    mesurefile = ask(folder,ext='/Mesure*'+os.path.basename(cinefile).rsplit(".",1)[0]+'.hdf5')
+else:
+    mesurefile = ask(folder,ext='Mesure*'+'.hdf5')
+    
 print(datafile)
 print(mesurefile)
 
@@ -100,7 +109,7 @@ M.PIV3D.data = M.data
 #M.PIV3d.m['np']
 
 #sauvegarde la mesure
-f = h5pylea.file_name_in_dir(M, savefolder, overwrite=True)
+f = h5pylea.file_name_in_dir(M, savefolder)
 h5pylea.obj_in_h5py(M,f)
 f.close()
 
@@ -109,20 +118,28 @@ f.close()
 piv = M.PIV3D
 ff = piv.m['U']
 
+M.data.param.f = int(M.data.param.galvo[:-1])*1000
+M.data.param.fps = int(M.data.param.fps[:-1])*1000
+M.data.param.fx = float(M.data.param.fx)
+print(M.data.param.fx)
+
 #convert 2d to 3d data
 (Nt,Nx,Ny,Nc) = ff.shape
 frame_diff = int(M.data.param.fps // M.data.param.f)
 print(frame_diff)
-Nt = Nt//frame_diff
-Nz = frame_diff
 
-ff = np.reshape(ff[:Nt*Nz,...],(Nt,Nz,Nx,Ny,Nc))
-ff[...,1] = -ff[...,1] #reverse sign of horizontal component
-start = int(M.data.param.startV)
-end = int(M.data.param.endV)
+start = 4#int(M.data.param.startV)
+Nt = (Nt-start)//frame_diff
+Nz = frame_diff
+end = 4+Nz//2#int(M.data.param.endV)
+
 #ff=ff[:,9:25,...]
 #(start,end) = v.m['instantV'][0]
-ff=ff[:,start+2:end-2,...]
+#ff=ff[:,start:end,...]
+ff = np.reshape(ff[start:Nt*Nz+start,...],(Nt,Nz,Nx,Ny,Nc))
+ff[...,1] = -ff[...,1] #reverse sign of horizontal component
+ff = ff[:,:Nz//2,...]
+
 print(ff.shape)
 
 
@@ -131,12 +148,15 @@ dz = float(piv.data.param.l_c)/frame_diff*2
 print(dz)
 
 piv.m['overlap'] = 16
-dx = piv.data.param.fx*piv.m['overlap']
+dx = float(M.data.param.fx*piv.m['overlap'])
 print(dx)
 
 #generate axis
 (Nz,Nx,Ny,Nc) = ff[0,...].shape
 #mean_flow = np.transpose(mean_flow,(1,2,0,3))
+
+print(dx)
+print(Nx)
 
 x = np.arange(-(Nx-1)/2,(Nx-1)/2+1)*dx
 y = np.arange(-(Ny-1)/2,(Ny-1)/2+1)*dx
@@ -185,9 +205,9 @@ u_rms = np.sqrt(np.nanmean(fluc[...,0]**2+fluc[...,1]**2 ,axis=0) )
 piv.m['mean_flow'] = mean_flow
 #piv.m['fluc'] = fluc
 piv.m['u_rms'] = u_rms
-
+piv.m['U'] = ff
 
 #sauvegarde la mesure, après reconstitution des volumes
-f = h5pylea.file_name_in_dir(M, savefolder,overwrite=True)
+f = h5pylea.file_name_in_dir(M, savefolder)
 h5pylea.obj_in_h5py(M,f)
 f.close()
