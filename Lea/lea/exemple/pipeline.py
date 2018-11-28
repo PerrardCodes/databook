@@ -93,7 +93,7 @@ f = lh5py.file_name_in_dir(m, savefolder)
 lh5py.obj_in_h5py(m, f)
 f.close()
 
-stophere
+#stophere
 
 ###generate Piv3D object
 piv3 = lpiv3d.Piv3D(d)
@@ -113,8 +113,8 @@ f = lh5py.file_name_in_dir(m, savefolder)
 lh5py.obj_in_h5py(m, f)
 f.close()
 
+#go from 2d to 3d field, still some correction to make
 piv3 = piv3.from2d_to3d()
-
 
 #sauvegarde la mesure, après reconstitution des volumes
 f = lh5py.file_name_in_dir(m, savefolder)
