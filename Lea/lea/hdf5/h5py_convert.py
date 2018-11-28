@@ -41,7 +41,7 @@ def obj_in_h5py(object, file, group=None, point='', attr=''):
 	if type(object) in [list]:
 		object = np.asarray(object)
 		for i in range (0, len(attr)):
-			attr[i] = str(attr[i]).encode("utf-8")
+			attr[i] = attr[i]#).encode("utf-8")
 	if type(object) in [np.ndarray]:
 		dataname = group.name+'/'+point
 		if dataname not in file :
