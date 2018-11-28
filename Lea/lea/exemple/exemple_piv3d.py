@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import lea.data.Data as data
 import lea.mesure.Piv3D as piv
 import lea.mesure.Mesure as m
@@ -15,11 +16,17 @@ import time
 
 ###Création de la Data :###
 ##Depuis un fichier cine, jpg, dossier...
-date = "20181114"
+date = "20181126"
 heure = "1000"
 
-base = "/media/stephane/"
-folder = 'DATA/Experimental_data/Turbulence3d/'+date+'/'
+#base = "/media/stephane/"
+#folder = 'DATA/Experimental_data/Turbulence3d/'+date+'/'
+
+base = ""
+folder = '/Volumes/Diderot/DATA_Princeton_November2018/20181126/'
+adresse_s= '/Users/stephane/Documents/Postdoc_Princeton/Piv3d/20181106/'
+
+
 l =glob.glob(base+folder+'*.cine')
 print("number of cinefiles : "+str(len(l)))
 
@@ -41,16 +48,19 @@ mesure = m.Mesure(d)
 piv3 = piv.Piv3D(d)
 mesure.add_measurement(piv3)
 t1 = time.time()
-print(d.param.fx)
-print(d.param.fps)
-print(d.param.f)
-piv3 = piv3.analysis_multi_proc('', cinefile, cinefile, npy=None, fx='toto', dt_origin=1./40000, frame_diff=40, crop_lims=None, maskers=None, window_size=32, overlap=16, search_area_size=32, save=False, s2n_thresh=1.2, bg_n_frames=None)
+#print(d.param.fx)
+#print(d.param.fps)
+#print(d.param.f)
+overlap = 16
+window_size = 32
+
+piv3 = piv3.analysis_multi_proc('', cinefile, cinefile, npy=None, fx='toto', dt_origin=None, frame_diff=None, crop_lims=None, maskers=None, window_size=window_size, overlap=overlap, search_area_size=window_size, save=False, s2n_thresh=1.2, bg_n_frames=None)
 t2 = time.time()
 ###Mise des données dans un fichier HDF5###
 ##Si le fichier est déjà crée :
 #f = ouverture_fichier("/home/ldupuy/Documents/Stage_Python_(2018)/new/Mesure_0_20171109_1_frame.hdf5")
 ##Pour créer le fichier
-f = h5py.file_name_in_dir(mesure, os.path.dirname(cinefile))
+f = h5py.file_name_in_dir(mesure, adresse_s)
 h5py.obj_in_h5py(mesure, f)
 
 
