@@ -6,7 +6,7 @@ import lea.mesure.Mesure as mesure
 import lea.mesure.Contour as contour
 import lea.mesure.Bulles as bulles
 import lea.mesure.Piv3D as piv
-import lea.mesure.Volume as volume
+import lea.mesure.Volume_SP as volume
 
 import numpy as np
 import h5py
@@ -49,7 +49,7 @@ def obj_in_h5py(object, file, group=None, point='', attr=''):
 		else :
 			file[dataname][...] = attr
 	if type(object) in [bool, int, str, float, np.int64, np.float64]:
-		group.attrs[point] = str(attr)
+		group.attrs[point] = attr
 
 #Crée et ouvre le fichier à une certaine adresse et grace à un objet
 #Si l'adresse n'existe pas il crée la crée.
@@ -65,7 +65,7 @@ def file_name_in_dir(object, adresse):
 	#Crée le fichier avec w, si le fichier existe le supprime
 	f = h5py.File(adresse + "/" + name, "w")
 	#r+ sert à lire/écrire si le fichier existe
-	f = h5py.File(adresse + "/" + name, "r+")
+	#f = h5py.File(adresse + "/" + name, "r+")
 	return f
 
 #Ouvre le fichier
@@ -230,5 +230,5 @@ def creation_utilisateur():
 	date =time.strftime("%Y%m%d" , time.localtime(os.path.getmtime(fichier)))
 	heure =time.strftime("%H%M" , time.localtime(os.path.getmtime(fichier)))
 	spec = {}
-	d = dataData(fichier, param, spec, index=index, typ=typ, who=who, date=date, heure=heure)
+	d = data.Data(fichier, param, spec, index=index, typ=typ, who=who, date=date, heure=heure)
 	return d

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import lea.data.Data as data
 import lea.hdf5.h5py_convert as lh5py
 
@@ -40,9 +41,9 @@ def convert_files(adresse, adresse_s):
 	liste_fichier= os.listdir(adresse)
 	liste_fichier = tri_insertion(liste_fichier, adresse)
 	cine = is_cine(liste_fichier, adresse)
-	p = glob.glob(adresse + "/*.txt")
+	p = glob.glob(adresse + "/*param.txt")
 	if(len(p)>0) :
-		p = glob.glob(adresse + "/*.txt")[0]
+		p = p[0] #choisit arbirtrairement le premier
 	else :
 		p = {}
 	index = 1
@@ -55,18 +56,19 @@ def convert_files(adresse, adresse_s):
 		#regarde si le fichier est un .cine
 		#ou s'il n'y a pas de .cine il prend les .avi
 		if(get_extention(file)=="cine" or (get_extention(file)=="avi" and not(cine))):
+			cinefile = adresse + '/' + file  
 			#On veut récupérer l'heure et la date
 			#Si le fichier n'a pas la date de son dossier il la prend
 			#Si le fichier n'a pas de date en titre il met alors date du fichier
 			try :
 				dir = int(name_dir)
 			except :
-				date = time.strftime("%Y%m%d" , time.localtime(os.path.getmtime(adresse + "/" + file)))
-				heure = time.strftime("%H%M" , time.localtime(os.path.getmtime(adresse+ "/" + file)))
+				date = time.strftime("%Y%m%d" , time.localtime(os.path.getmtime(cinefile)))
+				heure = time.strftime("%H%M" , time.localtime(os.path.getmtime(cinefile)))
 				print("Le nom du dossier doit être une date")
 			else :
-				if time.strftime("%y%m%d" , time.localtime(os.path.getmtime(adresse + "/" + file)))==dir:
-					heure = time.strftime("%H%M" , time.localtime(os.path.getmtime(adresse+ "/" + file)))
+				if time.strftime("%y%m%d" , time.localtime(os.path.getmtime(cinefile)))==dir:
+					heure = time.strftime("%H%M" , time.localtime(os.path.getmtime(cinefile)))
 				else :
 					heure = "0000"
 				if(len(name_dir)==6):
@@ -74,12 +76,13 @@ def convert_files(adresse, adresse_s):
 				else :
 					date = str(dir)
 			#On a tous ce qui est nécessaire à la création de Data
-			d = data.Data(adresse + "/" + file, p, spec, index=index, date=date, heure=heure)
+			spec = cinefile
+			d = data.Data(cinefile, p, spec, index=index, date=date, heure=heure)
 			lh5py.obj_in_h5py(d, lh5py.file_name_in_dir(d, adresse_s))
 			index +=1
 		elif(get_extention(file) in ["tif", "jpeg", "png"]):
-			date = time.strftime("%Y%m%d" , time.localtime(os.path.getmtime(adresse + "/" + file)))
-			heure = time.strftime("%H%M" , time.localtime(os.path.getmtime(adresse+ "/" + file)))
+			date = time.strftime("%Y%m%d" , time.localtime(os.path.getmtime(cinefile)))
+			heure = time.strftime("%H%M" , time.localtime(os.path.getmtime(cinefile)))
 			d = data.Data(adresse + "/" + file, p, spec, index=index,date=date, heure=heure)
 			lh5py.obj_in_h5py(d, lh5py.file_name_in_dir(d, adresse_s))
 			index+=1

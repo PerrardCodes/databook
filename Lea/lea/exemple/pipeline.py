@@ -4,7 +4,7 @@ import lea.data.Param as lparam
 
 import lea.mesure.Piv3D as lpiv3d
 import lea.mesure.Mesure as lmesure
-import lea.mesure.Volume as lvolume
+import lea.mesure.Volume_SP as lvolume
 
 import lea.hdf5.routine as routine
 
@@ -68,17 +68,28 @@ f.close()
 #compute the volume on the first 200 frames
 m = lmesure.Mesure(d)
 v = lvolume.Volume(d)
-v = v.volume(nb_im=200)
+v = v.volume()
 
-print(v.m['tV'])
+Nt = len(v.m['tV'])
 
-for i in range(3,4):
-    print(v.m['tV'])
+temp = {}
+temp['instantV'] = []
+temp['tV'] = []
+
+for n in range(len(v.m['instantV'])) :
+    temp['instantV'].append(v.m['instantV'][n])#.decode('UTF-8')
+for n in range(len(v.m['tV'])) :
+    temp['tV'].append(v.m['tV'][n])#.decode('UTF-8')
+
+print(temp['tV'])
+
+for i in range(3):
+    print(temp['tV'])
 
     Vol,instant,t = v.get_volume(i)
 
     v0 = lvolume.Volume(d)
-    v0.m['Volume'] = Vol
+    v0.m['volume'] = Vol
     v0.m['instant'] = instant
     v0.m['t'] = t
     
@@ -94,6 +105,9 @@ lh5py.obj_in_h5py(m, f)
 f.close()
 
 #stophere
+
+stophere
+
 
 ###generate Piv3D object
 piv3 = lpiv3d.Piv3D(d)
