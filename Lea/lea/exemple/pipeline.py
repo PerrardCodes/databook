@@ -83,7 +83,7 @@ for n in range(len(v.m['tV'])) :
 
 print(temp['tV'])
 
-for i in range(3):
+for i in range(Nt):
     print(temp['tV'])
 
     Vol,instant,t = v.get_volume(i)
