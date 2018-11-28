@@ -1,8 +1,6 @@
 import lea.h5py_convert
 import lea.Piv3D
 
-import os
-
 def genere_manual(piv):
     parent_folder = '/media/stephane/'
     date = '20181018'

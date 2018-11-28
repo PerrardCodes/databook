@@ -74,7 +74,7 @@ class PIVDataProcessing:
         u, v, mask = openpiv.validation.sig2noise_val( u, v, sig2noise, threshold = s2n_thresh )
 
         return u,v
-        
+
     def run_analysis(self,a_frames=None,save=True,s2n_thresh=1.3,bg_n_frames=None):
 
         c=pims.open(self.cine_filepath)

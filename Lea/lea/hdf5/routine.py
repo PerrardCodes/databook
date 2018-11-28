@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
 import lea.data.Data as data
 import lea.hdf5.h5py_convert as lh5py
-
 
 import os
 import time
@@ -42,17 +40,16 @@ def convert_files(adresse, adresse_s):
 	liste_fichier= os.listdir(adresse)
 	liste_fichier = tri_insertion(liste_fichier, adresse)
 	cine = is_cine(liste_fichier, adresse)
-	p = glob.glob(adresse + "/*param.txt")[0]
+	p = glob.glob(adresse + "/*.txt")
+	if(len(p)>0) :
+		p = glob.glob(adresse + "/*.txt")[0]
+	else :
+		p = {}
 	index = 1
 	#Maintenant on s'occupe à tous les fichiers présents dans le dossier
 	for file in liste_fichier:
 		#spec est une liste propre à chaque fichier
-		spec = adresse + file
-		print(spec)
-		if not '.cine' in spec:
-		    spec = []
-		          
-		
+		spec = []
 		#sont les paramètres propre à chaque fichier
 		#auxquels on ajoute ceux commun au dossier
 		#regarde si le fichier est un .cine
@@ -172,11 +169,8 @@ def errase_dir(ref):
 #convert_arbo("/media/ldupuy/Chicago2/Experiments_Princeton", "/home/ldupuy/Documents/Stage_Python_(2018)/new/Experiments_Princeton_hdf5/")
 #errase_dir("/home/ldupuy/Documents/Stage_Python_(2018)/new/Experiments_Princeton_hdf5")
 if __name__ == '__main__':
-	#ref = '/home/dini/Documents/Stage_Stephane_2018'
-	#adresse_s = '/home/dini/Documents/Stage_Stephane_2018'
-	ref = '/Volumes/Diderot/DATA_Princeton_November2018/20181126'
-	adresse_s= '/Users/stephane/Documents/Postdoc_Princeton/Piv3d/20181106'
-
+	basefolder = '/media/stephane/DATA/Experimental_data/Turbulence3d'
+	adresse_s = basefolder
 	#ref = "/media/stephane/OS/Documents and Settings/Stephane/Documents/Data_buffer/20181010"
 	#adresse_s = '/media/stephane/DATA/Experimental_data/Turbulence3d/20181010'
-	convert_arbo(ref, adresse_s)
+	convert_arbo(basefolder, adresse_s)

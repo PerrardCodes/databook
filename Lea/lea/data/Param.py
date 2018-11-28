@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 import numpy as np
 import os
 
 class Param:
 
     def __init__(self, p, spec):
-        #print(p)
+        print(p)
         if(type(p)==dict):
             self.from_dict(p)
         elif(os.path.exists(p)) :

@@ -6,7 +6,6 @@ import lea.mesure.Mesure as mesure
 import lea.mesure.Contour as contour
 import lea.mesure.Bulles as bulles
 import lea.mesure.Piv3D as piv
-import lea.mesure.Volume as volume
 
 import numpy as np
 import h5py
@@ -49,7 +48,7 @@ def obj_in_h5py(object, file, group=None, point='', attr=''):
 		else :
 			file[dataname][...] = attr
 	if type(object) in [bool, int, str, float, np.int64, np.float64]:
-		group.attrs[point] = str(attr)
+		group.attrs[point] = attr
 
 #Crée et ouvre le fichier à une certaine adresse et grace à un objet
 #Si l'adresse n'existe pas il crée la crée.
@@ -131,15 +130,6 @@ def h5py_in_Mesure(f):
 	return m
 
 #récupère un file hdf5, un data et crée un objet Bulles
-def key(f):
-    return [key for key in f.keys()]
-
-def h5py_in_obj(f,data=None):
-    keys = key(f)
-    if 'Volume' in keys:
-        return h5py_in_Volume(f) 
-
-
 def h5py_in_Bulles(f, data):
 	group_b = f['Bulles']
 	m={}
@@ -154,22 +144,6 @@ def h5py_in_Bulles(f, data):
 	m["DF"] = df
 	b = bulles.Bulles(data, m=m)
 	return b
-	
-def h5py_in_Volume(f):
-	group_v = f['Volume']
-	m={}
-	for attr in group_v :
-		if(isinstance(group_v[attr], h5py.Dataset)) :
-			m[attr] = group_v[attr][()]
-	for attr in group_v.attrs:
-		m[attr] = group_v.attrs[attr]
-	#df = pd.DataFrame(data=temp)
-	#m["DF"] = df
-	f = f['Volume']
-	data = h5py_in_Data(f)
-	
-	v = volume.Volume(data, m=m)
-	return v
 
 #récupére un file hdf5, un data et crée un objet Contour
 def h5py_in_Contour(f, data):
@@ -191,12 +165,10 @@ def h5py_in_piv3d(f, data):
 	m={}
 	#temp={}
 	for attr in group_p :
-	   is_dataset = isinstance(group_p[attr], h5py.Dataset)
-	   if(is_dataset):
-	       m[attr] = group_p[attr][()]
-
+		if(isinstance(group_p[attr], h5py.Dataset)) :
+			m['np'] = group_p[attr][()]
 	for attr in group_p.attrs:
-	   m[attr] = group_p.attrs[attr]
+		m[attr] = group_p.attrs[attr]
 	#df = pd.DataFrame(data=temp)
 	#m["DF"] = df
 	b = piv.Piv3D(data, m=m)

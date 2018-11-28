@@ -26,25 +26,14 @@ class Volume(mesure.Mesure):
     def get_name(self):
         return "Volume"
 
-    def get_volume_garbage(self, adresse, adresse_s, hdf5=None):
-        if type(hdf5)==str:
-            f = lh5py.ouverture_fichier(hdf5)
-            f = f["Mesure/Volume"]
-            d = lh5py.h5py_in_Data(f)
-        else:
-            d = self.data
-            f = self.m
-            hdf5 = self.data.fichier
-            
+    def get_volume(self, adresse, hdf5):
+        f = lh5py.ouverture_fichier(hdf5)
+        f = f["Mesure/Volume"]
+        d = lh5py.h5py_in_Data(f)
         c = cine.Cine(d.fichier)
-        
-        L,H = c.get_shape()
-        print(L,H)
         vidcap = cv2.VideoCapture(d.fichier)
         L = int(vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT))
         H = int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        print(L,H)
-        
         group = f
         temp = {}
         temp['instantV'] = {}
@@ -63,14 +52,11 @@ class Volume(mesure.Mesure):
             self.m['volume']=nump
             self.m['tV']=temp['tV'][i]
             self.m['instantV']=temp['instantV'][i]
-            file = lh5py.file_name_in_dir(self, adresse_s + os.path.basename(hdf5) + "/")
+            file = lh5py.file_name_in_dir(self, adresse + "/Volume/" + os.path.basename(hdf5) + "/")
             lh5py.obj_in_h5py(self, file)
             file.close()
             print(nump.shape)
             del nump
-            
-        f.close()
-
 
         #temp['instantV'] = group['instantV'][()]
         #print(temp)
@@ -205,37 +191,3 @@ class Volume(mesure.Mesure):
 
     def get_im(self,i):
     	return super().get_im(self,i)
-
-    def get_volume(self, i):#adresse, adresse_s):            
-        c = cine.Cine(self.data.fichier)
-            
-        L,H = c.get_frame(0).shape
-        
-        print(self.m['tV'])
-        print(self.m['instantV'])
-        
-        print(type(self.m['instantV'][i]))
-        
-        if type(self.m['instantV'][i]) == bytes:
-            tup = tuple(self.m['instantV'][i].decode('UTF-8'))
-            print(tup)
-            print(type(tup))
-        else:
-            start,end = self.m['instantV'][i]
-            
-            
-        tV = self.m['tV'][i]
-        
-        Nz = np.abs(start-end)+1
-        Vol = np.zeros((Nz,L,H))
-        frames = np.arange(start,end+1,np.sign(end-start))
-                        
-        for j,frame in enumerate(frames):
-            Vol[j,...] = c.get_frame(frame)
-        
-#        self.m['volume']=Vol
-#        self.m['instant']=(start,end)
-#        self.m['t'] = tV[i] #be careful ! for some python object reason, self.m['tV'] erases m. Error not fixed by generating a new instance of volume
-            # as a consequence, the whole list of instantV and tV is stored on each file ... could be eventually removed
-            #save in a file
-        return Vol,(start,end),tV
