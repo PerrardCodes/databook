@@ -40,4 +40,4 @@ for i in range(6, len(tab)) :
     f = lh5py.file_name_in_dir(m, os.path.dirname(fichier) + "/Mesure_Volume/")
     lh5py.obj_in_h5py(m, f)
     f.close()
-    v.get_volume(os.path.dirname(fichier), os.path.dirname(fichier) + "/Mesure_Volume/Mesure_0_" + date + "_1_" + os.path.basename(fichier).rsplit(".", 1)[0] +".hdf5")
+    v.get_volume(os.path.dirname(fichier), os.path.dirname(fichier), os.path.dirname(fichier) + "/Mesure_Volume/Mesure_0_" + date + "_1_" + os.path.basename(fichier).rsplit(".", 1)[0] +".hdf5")

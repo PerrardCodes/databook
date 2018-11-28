@@ -1,4 +1,5 @@
-import lea.mesure.Mesure as m
+# -*- coding: utf-8 -*-
+import lea.mesure.Mesure as Mesure
 import lea.mesure.pre_traitement as pre
 import fluids2d.backlight as bl
 import lea.display.graphes as graphes
@@ -10,7 +11,7 @@ import h5py
 import psutil
 import time
 
-class Bulles(m.Mesure):
+class Bulles(Mesure.Mesure):
 	def __init__(self, data, m={}):
 		Mesure.__init__(self, data)
 		self.m=m

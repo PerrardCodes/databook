@@ -5,6 +5,8 @@ import lea.danjruth.piv as p
 
 import lea.danjruth.piv_volume as p3d
 
+import stephane.analysis.cdata as cdata
+
 
 from functools import partial
 from multiprocessing import Process, Pool
@@ -99,13 +101,15 @@ class Piv3D(mesure.Mesure):
         #dt_origin = self.dt_origin
         self.load_piv_parameters()
         
-        frame_diff = self.frame_diff
+        frame_diff = int(self.frame_diff)
+        self.data.nb_im = int(self.data.nb_im)
         
         print(frame_diff)
         Ncpu = os.cpu_count()
         with Pool(processes=Ncpu) as pool:
             ite = []
             for i in range(frame_diff):
+                #self.data.nb_im
                 #self.data.nb_im
                 ite.append(np.arange(i,self.data.nb_im-frame_diff, frame_diff))
 	        #ite = [(0,25), (26, 50), (51, 75), (76, 100)]
@@ -127,7 +131,101 @@ class Piv3D(mesure.Mesure):
             np.save(parent_folder+adresse_s+'_flowfield.npy',flowfield)
         self.m['U'] = flowfield
         return self
+    
+    def space_axis(self):
+        ff = self.m['U']
+        dx = self.m['dx']
+        dz = self.m['dz']
+                #generate space axis
+        (Nz,Nx,Ny,Nc) = ff[0,...].shape
+#mean_flow = np.transpose(mean_flow,(1,2,0,3))
+        x = np.arange(-(Nx-1)/2,(Nx-1)/2+1)*dx
+        y = np.arange(-(Ny-1)/2,(Ny-1)/2+1)*dx
+        z = np.arange(-Nz/2,Nz/2)*dz-2
+        [X,Z,Y] = np.meshgrid(x,z,y)
+        
+        self.m['x'] = x
+        self.m['y'] = y
+        self.m['z'] = z
 
+    def from2d_to3d(self):
+    #make sure the name is correct
+        if 'np' in self.m.keys():
+            print('np format')
+            print(self.m['np'].shape)
+    
+            # rename the field
+            self.m['U']=M.PIV3D.m['np']
+            self.m.pop('np')
+
+        #create a shortcut for the velocity field
+        ff = self.m['U']
+
+        self.load_piv_parameters()
+        print(self.fx)
+
+        #convert 2d to 3d data
+        (Nt,Nx,Ny,Nc) = ff.shape
+        frame_diff = self.frame_diff#int(M.data.param.fps // M.data.param.f)
+        print(frame_diff)
+
+        start = self.data.param.startV[0]#int(M.data.param.startV)
+        Nt = (Nt-start)//frame_diff
+        Nz = frame_diff
+        end = start+Nz//2#int(M.data.param.endV)
+
+#ff=ff[:,9:25,...]
+#(start,end) = v.m['instantV'][0]
+#ff=ff[:,start:end,...]
+        ff = np.reshape(ff[start:Nt*Nz+start,...],(Nt,Nz,Nx,Ny,Nc))
+        ff[...,1] = -ff[...,1] #reverse sign of horizontal component
+        ff = ff[:,:Nz//2,...]
+        print(ff.shape)
+
+        
+        # generate time axis
+        dz = float(self.data.param.l_c)/frame_diff*2
+        print(dz)
+
+        self.m['overlap'] = 16
+        dx = float(self.data.param.fx*self.m['overlap'])        
+        print(dx)
+
+        self.m['dz'] = dz
+        self.m['dx'] = dx
+        self.space_axis()
+
+        #generate time axis
+        ft = frame_diff/self.fps
+        print(ft)
+        self.m['ft'] =  ft
+        self.m['t'] = np.arange(0,Nt*ft,ft)
+
+
+        # remove nan from the edges
+        print(cdata.nancount(ff))
+        ff = ff[...,1:-1,1:-1,:]
+        print(cdata.nancount(ff))
+        
+        ff = cdata.remove_nan_3d(ff)
+        print(cdata.nancount(ff))
+    
+        self.m['U'] = ff
+        self.compute_mean_flow()
+    
+    def compute_mean_flow(self):
+#compute mean_flow
+        ff = self.m['U']
+        mean_flow = np.nanmean(ff,axis=0)
+        mean_flow_speed = np.linalg.norm(mean_flow,axis=2)
+        mean_speed = np.nanmean( np.sqrt(ff[...,0]**2 + ff[...,1]**2 ), axis=0)
+        fluc = ff - mean_flow    
+        u_rms = np.sqrt(np.nanmean(fluc[...,0]**2+fluc[...,1]**2 ,axis=0) )
+
+        self.m['mean_flow'] = mean_flow
+#piv.m['fluc'] = fluc
+        self.m['u_rms'] = u_rms
+        self.m['U'] = ff
 
     def add_measurement(self, obj, name):
         setattr(self, name, obj)

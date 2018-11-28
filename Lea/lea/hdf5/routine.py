@@ -2,6 +2,7 @@
 import lea.data.Data as data
 import lea.hdf5.h5py_convert as lh5py
 
+
 import os
 import time
 from PIL import Image
@@ -41,12 +42,17 @@ def convert_files(adresse, adresse_s):
 	liste_fichier= os.listdir(adresse)
 	liste_fichier = tri_insertion(liste_fichier, adresse)
 	cine = is_cine(liste_fichier, adresse)
-	p = glob.glob(adresse + "/*.txt")[0]
+	p = glob.glob(adresse + "/*param.txt")[0]
 	index = 1
 	#Maintenant on s'occupe à tous les fichiers présents dans le dossier
 	for file in liste_fichier:
 		#spec est une liste propre à chaque fichier
-		spec = []
+		spec = adresse + file
+		print(spec)
+		if not '.cine' in spec:
+		    spec = []
+		          
+		
 		#sont les paramètres propre à chaque fichier
 		#auxquels on ajoute ceux commun au dossier
 		#regarde si le fichier est un .cine

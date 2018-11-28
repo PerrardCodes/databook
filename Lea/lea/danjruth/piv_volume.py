@@ -103,11 +103,15 @@ class PIVDataProcessing:
         return u,v
     def volume_analysis(self,i,dt=2):
         
+#        dx = self.fx
+#        dy = self.fx
+#        dz = self.data.
+        
         #axis order by default : z,x,y. The z axis correspond to the scanning axis
         
         #load the two volumes in memory
-        volume_a = self.get_volume(i).m['volume']
-        volume_b = self.get_volume(i+dt).m['volume']
+        volume_a = self.get_volume(i).m['Volume']
+        volume_b = self.get_volume(i+dt).m['Volume']
         
         Nz,Nx,Ny = volume_a.shape
                 
@@ -119,9 +123,11 @@ class PIVDataProcessing:
         
         nx,ny = process.get_field_shape(frame_shape,window_size,overlap)
 
-        startz = (volume_a.shape[0]%16)//2 #reste dans la division par 16
-        endz = startz+16
-        zlist = range(startz,endz)
+        windowz = 32
+        a=3 #for the smoothing operation along z
+        startz = (volume_a.shape[0]%windowz)//2 #reste dans la division par windowz
+        endz = startz+windowz
+        zlist = range(startz+a,endz-a)
         nz = len(zlist)
         
         print(nz,nx,ny)
@@ -129,11 +135,15 @@ class PIVDataProcessing:
         Ux_3d = np.zeros((nz,nx,ny))
         Uy_3d = np.zeros((nz,nx,ny))
         
-        for l,z in enumerate(zlist):
-            frame_a = volume_a[z,...].astype(np.int32)
-            frame_b = volume_b[z,...].astype(np.int32)
         
-            u,v,sig2noise = process.extended_search_area_piv(frame_a, frame_b, window_size=window_size, overlap=overlap, dt=dt, search_area_size=window_size,sig2noise_method='peak2peak' )
+        for l,z in enumerate(zlist):
+            frame_a = np.nanmean(volume_a[z-a:z+a+1,...],axis=0).astype(np.int32)
+            frame_b = np.nanmean(volume_b[z-a:z+a+1,...],axis=0).astype(np.int32)
+ 
+#            frame_a = volume_a[z,...].astype(np.int32)
+#            frame_b = volume_b[z,...].astype(np.int32)
+        
+            u,v,sig2noise = process.extended_search_area_piv(frame_a, frame_b, window_size=window_size, overlap=overlap, dt=1, search_area_size=window_size,sig2noise_method='peak2peak' )
 
             Uy_3d[l,...] = u
             Ux_3d[l,...] = v
@@ -141,10 +151,10 @@ class PIVDataProcessing:
         #### process along xz ####
         print('Process along xz')
 
-        window_size = [16,32]
-        overlap = [8,16]
+        window_size = [32,32]
+        overlap = [16,16]
         frame_shape = (Nz,Nx)
-        a=2 #for the smoothing operation along y
+        a=3 #for the smoothing operation along y
         
         nz,nx = process.get_field_shape(frame_shape,window_size,overlap)
         ylist = range(a,Ny-a)
@@ -166,10 +176,10 @@ class PIVDataProcessing:
         ### process along yz ###
         print('Process along yz')
 
-        window_size = [16,32]
-        overlap = [8,16]
+        window_size = [32,32]
+        overlap = [16,16]
         frame_shape = (Nz,Ny)
-        a=2 #for the smoothing operation along y
+        a=3 #for the smoothing operation along y
         
         nz,ny = process.get_field_shape(frame_shape,window_size,overlap)
         xlist = range(a,Nx-a)

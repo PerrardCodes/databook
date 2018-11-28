@@ -160,7 +160,7 @@ def h5py_in_Volume(f):
 	m={}
 	for attr in group_v :
 		if(isinstance(group_v[attr], h5py.Dataset)) :
-			m['volume'] = group_v[attr][()]
+			m[attr] = group_v[attr][()]
 	for attr in group_v.attrs:
 		m[attr] = group_v.attrs[attr]
 	#df = pd.DataFrame(data=temp)
