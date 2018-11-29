@@ -26,14 +26,20 @@ class Volume(mesure.Mesure):
     def get_name(self):
         return "Volume"
 
-    def get_volume(self, adresse, hdf5):
-        f = lh5py.ouverture_fichier(hdf5)
-        f = f["Mesure/Volume"]
-        d = lh5py.h5py_in_Data(f)
+    def get_volume_garbage(self, adresse, adresse_s, hdf5=None):
+        if type(hdf5)==str:
+            f = lh5py.ouverture_fichier(hdf5)
+            f = f["Mesure/Volume"]
+            d = lh5py.h5py_in_Data(f)
+        else:
+            d = self.data
+            f = self.m
+            hdf5 = self.data.fichier
+            
         c = cine.Cine(d.fichier)
-        vidcap = cv2.VideoCapture(d.fichier)
-        L = int(vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        H = int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        
+        L,H = c.get_shape()
+        
         group = f
         temp = {}
         temp['instantV'] = {}
@@ -42,6 +48,7 @@ class Volume(mesure.Mesure):
             temp["instantV"][n] = group['instantV'][n].decode('UTF-8')
         for n in range(0, len(group['tV'])) :
             temp["tV"][n] = group['tV'][n].decode('UTF-8')
+            
         for i in range(0, len(temp['instantV'])):
             un = make_tuple(temp['instantV'][i])[0]
             deux = make_tuple(temp['instantV'][i])[1]
@@ -52,11 +59,14 @@ class Volume(mesure.Mesure):
             self.m['volume']=nump
             self.m['tV']=temp['tV'][i]
             self.m['instantV']=temp['instantV'][i]
-            file = lh5py.file_name_in_dir(self, adresse + "/Volume/" + os.path.basename(hdf5) + "/")
+            file = lh5py.file_name_in_dir(self, adresse_s + os.path.basename(hdf5) + "/")
             lh5py.obj_in_h5py(self, file)
             file.close()
             print(nump.shape)
             del nump
+            
+        f.close()
+
 
         #temp['instantV'] = group['instantV'][()]
         #print(temp)
@@ -79,13 +89,16 @@ class Volume(mesure.Mesure):
             Dic['N'] = nb_im
         instant = self.find_timejumps(c, Dic)
 
-        Dic['Nz'] = 20
+        Dic['f'] = int(self.data.param.flaser)
+        Dic['Nz'] = Dic['fps']//Dic['f']
         #we should find the number of images using framerate/f, see data.param, need lea's package
 
         #(instantV,tV) = find_positionlaser(c,instant,Nz=Nz)
-        (instantV,tV) = self.analysis_multi_proc(cinefile, instant, Dic, Nz=Dic['Nz'])
+        (instantV,tV,CV) = self.analysis_multi_proc(cinefile, instant, Dic, Nz=Dic['Nz'])
         self.m['instantV']=instantV
         self.m['tV'] = tV
+        self.m['CV'] = CV
+        
         return self
 
     def find_timejumps(self, c, Dic):
@@ -126,14 +139,17 @@ class Volume(mesure.Mesure):
 
                 instantV = []
                 tV = []
+                CV = []
                 print(len(instant))
                 print(len(instant[0]))
 
                 for i in range(min(Ncpu,len(instant))):
                     instantV = instantV + f[i][0]
                     tV = tV + f[i][1]
+                    CV = CV + f[i][2]
 
-        return (instantV,tV)
+
+        return (instantV,tV,CV)
 
     def find_positionlaser(self, c, Nz, start=0, end=1):#, a=5, Nz=None):
         instantV = []
@@ -187,7 +203,38 @@ class Volume(mesure.Mesure):
 
             #plt.plot(C[maximum[0]:maximum[-1]])
             #plt.axis([0,150,0.65,1])
-        return (instantV,tV)
+        return (instantV,tV,C)
 
     def get_im(self,i):
     	return super().get_im(self,i)
+
+    def get_volume(self, i):#adresse, adresse_s):            
+        c = cine.Cine(self.data.fichier)
+            
+        L,H = c.get_frame(0).shape
+        
+#        print(self.m['tV'])
+#        print(self.m['instantV'])
+#        print(type(self.m['instantV'][i]))
+        
+        start,end = (self.m['instantV'][i][0],self.m['instantV'][i][1])
+        #print(start,end)
+        #else:
+        #    start,end = self.m['instantV'][i]
+        tV = self.m['tV'][i]
+        
+        Nz = np.abs(start-end)+1
+        Vol = np.zeros((Nz,L,H))
+        
+        print(start,end)
+        frames = np.arange(start,end+1,np.sign(end-start))
+                        
+        for j,frame in enumerate(frames):
+            Vol[j,...] = c.get_frame(frame)
+        
+#        self.m['volume']=Vol
+#        self.m['instant']=(start,end)
+#        self.m['t'] = tV[i] #be careful ! for some python object reason, self.m['tV'] erases m. Error not fixed by generating a new instance of volume
+            # as a consequence, the whole list of instantV and tV is stored on each file ... could be eventually removed
+            #save in a file
+        return Vol,(start,end),tV
