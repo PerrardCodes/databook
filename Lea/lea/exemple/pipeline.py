@@ -68,7 +68,17 @@ f.close()
 #compute the volume on the first 200 frames
 m = lmesure.Mesure(d)
 v = lvolume.Volume(d)
-v = v.volume()
+v = v.volume(nb_im=2040)
+
+m.add_measurement(v)
+    
+# save the measure of volume in a hdf5 file    
+f = lh5py.file_name_in_dir(m, savefolder + '/Volume_Correlation'+ "/")
+lh5py.obj_in_h5py(m, f)
+f.close()
+
+
+stophere
 
 Nt = len(v.m['tV'])
 
@@ -84,11 +94,13 @@ for n in range(len(v.m['tV'])) :
 print(temp['tV'])
 
 for i in range(Nt):
+    m = lmesure.Mesure(d)
+
     print(temp['tV'])
-
     Vol,instant,t = v.get_volume(i)
-
+    
     v0 = lvolume.Volume(d)
+    
     v0.m['volume'] = Vol
     v0.m['instant'] = instant
     v0.m['t'] = t
@@ -97,16 +109,14 @@ for i in range(Nt):
     lh5py.obj_in_h5py(v0, f)
     f.close()
 
-
-m.add_measurement(v)
+#    m.add_measurement(v0)
+    
 # save the measure of volume in a hdf5 file    
-f = lh5py.file_name_in_dir(m, savefolder)
-lh5py.obj_in_h5py(m, f)
-f.close()
+#    f = lh5py.file_name_in_dir(m, savefolder + '/Volume'+ "/")
+#    lh5py.obj_in_h5py(m, f)
+#    f.close()
 
 #stophere
-
-stophere
 
 
 ###generate Piv3D object

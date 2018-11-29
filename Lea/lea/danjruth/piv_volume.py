@@ -101,7 +101,7 @@ class PIVDataProcessing:
         #u, v, mask = validation.sig2noise_val( u, v, sig2noise, threshold = s2n_thresh )
 
         return u,v
-    def volume_analysis(self,i,dt=2):
+    def volume_analysis(self,i,key,dt=2):
         
 #        dx = self.fx
 #        dy = self.fx
@@ -110,8 +110,8 @@ class PIVDataProcessing:
         #axis order by default : z,x,y. The z axis correspond to the scanning axis
         
         #load the two volumes in memory
-        volume_a = self.get_volume(i).m['Volume']
-        volume_b = self.get_volume(i+dt).m['Volume']
+        volume_a = self.get_volume(i).m[key]
+        volume_b = self.get_volume(i+dt).m[key]
         
         Nz,Nx,Ny = volume_a.shape
                 
@@ -127,7 +127,7 @@ class PIVDataProcessing:
         a=3 #for the smoothing operation along z
         startz = (volume_a.shape[0]%windowz)//2 #reste dans la division par windowz
         endz = startz+windowz
-        zlist = range(startz+a,endz-a)
+        zlist = range(startz+a,endz-a,overlap[0])
         nz = len(zlist)
         
         print(nz,nx,ny)
@@ -157,7 +157,7 @@ class PIVDataProcessing:
         a=3 #for the smoothing operation along y
         
         nz,nx = process.get_field_shape(frame_shape,window_size,overlap)
-        ylist = range(a,Ny-a)
+        ylist = range(a,Ny-a,overlap[0])
         ny = len(ylist)
         print(nz,nx,ny)
         
@@ -182,7 +182,7 @@ class PIVDataProcessing:
         a=3 #for the smoothing operation along y
         
         nz,ny = process.get_field_shape(frame_shape,window_size,overlap)
-        xlist = range(a,Nx-a)
+        xlist = range(a,Nx-a,overlap[0])
         nx = len(xlist)
         print(nz,nx,ny)
         

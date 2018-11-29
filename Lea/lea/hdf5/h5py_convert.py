@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import lea.data.Data as data
-import lea.data.Id as id
-import lea.data.Param as param
+
 import lea.mesure.Mesure as mesure
 import lea.mesure.Contour as contour
 import lea.mesure.Bulles as bulles
@@ -11,10 +10,7 @@ import lea.mesure.Volume_SP as volume
 import numpy as np
 import h5py
 import os
-import sys
-import datetime
 import time
-import calendar
 import pandas as pd
 import glob
 
@@ -23,7 +19,8 @@ def obj_in_h5py(object, file, group=None, point='', attr=''):
 	try :
 		dic = object.__dict__
 	except AttributeError :
-		print(object)
+		pass
+		#print(object)
 	else :
 		if group is None:
 			group = object.get_name()
@@ -40,8 +37,8 @@ def obj_in_h5py(object, file, group=None, point='', attr=''):
 			obj_in_h5py(object[key], file, group=group, point=key, attr=attr)
 	if type(object) in [list]:
 		object = np.asarray(object)
-		for i in range (0, len(attr)):
-			attr[i] = attr[i]#).encode("utf-8")
+#		for i in range (0, len(attr)):		
+#			attr[i] = attr[i]#).encode("utf-8")
 	if type(object) in [np.ndarray]:
 		dataname = group.name+'/'+point
 		if dataname not in file :
@@ -70,7 +67,7 @@ def file_name_in_dir(object, adresse):
 
 #Ouvre le fichier
 def ouverture_fichier(name, mode="r"):
-	print(type(h5py))
+	#print(type(h5py))
 	f = h5py.File(name, mode)
 	return f
 

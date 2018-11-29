@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import lea.data.Data
 import lea.mesure.pre_traitement as preT
 import lea.display.graphes as graphes
@@ -32,7 +33,6 @@ class Mesure:
 		except NameError:
 			pass
 		setattr(self, name, obj)
-
 
 
 	def get_im(self, object, i):
