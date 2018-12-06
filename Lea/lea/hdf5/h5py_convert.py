@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
 import lea.data.Data as data
 
-import lea.mesure.Mesure as mesure
-import lea.mesure.Contour as contour
-import lea.mesure.Bulles as bulles
-import lea.mesure.Piv3D as piv
-import lea.mesure.Volume_SP as volume
 
 import numpy as np
 import h5py
@@ -37,8 +32,8 @@ def obj_in_h5py(object, file, group=None, point='', attr=''):
 			obj_in_h5py(object[key], file, group=group, point=key, attr=attr)
 	if type(object) in [list,tuple]:
 		object = np.asarray(object)
-		for i in range (0, len(attr)):		
-			attr[i] = attr[i]#.encode("utf-8")
+		#for i in range (0, len(attr)):
+		#	attr[i] = attr[i]#.encode("utf-8")
 	if type(object) in [np.ndarray]:
 		dataname = group.name+'/'+point
 		if dataname not in file :
@@ -48,8 +43,8 @@ def obj_in_h5py(object, file, group=None, point='', attr=''):
 	if type(object) in [bool, int, float, np.int64, np.float64]:
 		group.attrs[point] = attr
 	elif type(object) in [str]:
-                group.attrs[point] = attr.encode('utf-8') #encode it to avoid error due to special characters
-                
+		group.attrs[point] = attr.encode('utf-8') #encode it to avoid error due to special characters
+
 
 #Crée et ouvre le fichier à une certaine adresse et grace à un objet
 #Si l'adresse n'existe pas il crée la crée.
@@ -59,7 +54,7 @@ def file_name_in_dir(object, adresse):
 	if(object.get_name()=="Data"):
 		name = cstr(object.id.date) + '_' + cstr(object.id.index) + '_' +  cstr(object.fichier.rsplit("/", 1)[1].split(".")[0]) + ".hdf5"
 	else:
-		name = str(object.data.id.date) + '_' + str(object.data.id.index) + '_' +  object.data.fichier.rsplit("/", 1)[1].split(".")[0] + ".hdf5"
+		name = cstr(object.data.id.date) + '_' + cstr(object.data.id.index) + '_' +  cstr(object.data.fichier.rsplit("/", 1)[1].split(".")[0]) + ".hdf5"
 		count = len(glob.glob(adresse + "/Mesure_*" +name))
 		name = "Mesure_" + str(count) + "_" + name
 	#Crée le fichier avec w, si le fichier existe le supprime
@@ -69,8 +64,13 @@ def file_name_in_dir(object, adresse):
 	return f
 
 def cstr(s):
-    return str(s.decode('utf-8'))
-    
+	if(type(s) in[str]):
+		return s
+	elif (type(s) in[int, np.int64, np.float64]):
+		return str(s)
+	else :
+		return str(s.decode('utf-8'))
+
 #Ouvre le fichier
 def ouverture_fichier(name, mode="r"):
 	#print(type(h5py))
@@ -80,6 +80,7 @@ def ouverture_fichier(name, mode="r"):
 
 #récupère un fichier hdf5 et en crée un data
 def h5py_in_Data(f) :
+	from lea.data.Param import define_type as dt
 	group = f['Data']
 	d={}
 	for attr in group:
@@ -89,17 +90,25 @@ def h5py_in_Data(f) :
 			for i in range(0, len(group[attr])):
 				d[attr].append(group[attr][i])
 	for attr in group.attrs:
-		d[attr] = group.attrs[attr]
+		if(type(group.attrs[attr]) in[int, np.int64, np.float64]):
+			d[attr] = group.attrs[attr]
+		else :
+			d[attr] = dt(group.attrs[attr].decode('utf-8'))
 
 	group = f['Data/Param']
 	p = {}
 	for attr in group.attrs :
-		p[attr] = group.attrs[attr]
+		if(type(group.attrs[attr]) in[int, np.int64, np.float64]):
+			p[attr] = group.attrs[attr]
+		else :
+			p[attr] = dt(group.attrs[attr].decode('utf-8'))
+
 	s = group.get("spec")
 	spec = []
 	if(s!=None):
 		for t in s:
-			spec.append(t.decode('UTF-8'))
+			spec.append(t.decode('utf-8'))
+
 	group = f['Data/Id']
 	i = {}
 	for attr in group.attrs :
@@ -109,6 +118,7 @@ def h5py_in_Data(f) :
 
 #récupère un fichier hdf5 et crée un objet mesure
 def h5py_in_Mesure(f):
+	import lea.mesure.Mesure as mesure
 	group = f['Mesure']
 	m_dico = {}
 	bulles = None
@@ -130,11 +140,11 @@ def h5py_in_Mesure(f):
 		m.add_measurement(b)
 	if(f.__contains__("PIV3D")) :
 		p = h5py_in_piv3d(f, data)
-		m.add_measurement(p)		
+		m.add_measurement(p)
 	if(f.__contains__("Volume")) :
 		p = h5py_in_Volume(f, data)
 		m.add_measurement(p)
-				
+
 	return m
 
 #récupère un file hdf5, un data et crée un objet Bulles
@@ -144,10 +154,11 @@ def key(f):
 def h5py_in_obj(f,data=None):
     keys = key(f)
     if 'Volume' in keys:
-        return h5py_in_Volume(f) 
+        return h5py_in_Volume(f)
 
 
 def h5py_in_Bulles(f,data=None):
+	import lea.mesure.Bulles as bulles
 	group_b = f['Bulles']
 	m={}
 	temp={}
@@ -161,8 +172,9 @@ def h5py_in_Bulles(f,data=None):
 	m["DF"] = df
 	b = bulles.Bulles(data, m=m)
 	return b
-	
+
 def h5py_in_Volume(f, data=None):
+	import lea.mesure.Volume_SP as volume
 	group_v = f['Volume']
 	m={}
 	for attr in group_v :
@@ -175,12 +187,13 @@ def h5py_in_Volume(f, data=None):
 	f = f['Volume']
 	if data == None:
 	       data = h5py_in_Data(f)
-            
+
 	v = volume.Volume(data, m=m)
 	return v
 
 #récupére un file hdf5, un data et crée un objet Contour
 def h5py_in_Contour(f, data):
+	import lea.mesure.Contour as contour
 	group = f['Contour']
 	c = {}
 	df = pd.DataFrame()
@@ -195,6 +208,7 @@ def h5py_in_Contour(f, data):
 
 #récupère un file hdf5, un data et crée un objet PIV3D
 def h5py_in_piv3d(f, data):
+	import lea.mesure.Piv3D as piv
 	group_p = f['PIV3D']
 	m={}
 	#temp={}

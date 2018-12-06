@@ -28,7 +28,7 @@ class Param:
             for lines in f.readlines():
                 data = lines.strip().split('\t')
                 if len(data)==2: #En cas de saut de ligne vide
-                    setattr(self, data[0], data[1])
+                    setattr(self, data[0], define_type(data[1]))
 
     def spec_file(self, fichier):
         p = {}
@@ -61,6 +61,32 @@ def extract_param(str):
 	p= {}
 	for i in range(0, len(str)):
 		if(str[i].isdigit()):
-			p[str[0:i]] = str[i:len(str)]
+			p[str[0:i]] = define_type(str[i:len(str)])
 			return p
 	return {}
+
+def define_type(strg):
+    if(type(strg)==str):
+        try:
+            strg = int(strg)
+        except ValueError:
+            print("Pas un int")
+        else :
+            return strg
+        try:
+            strg = float(strg)
+        except ValueError:
+            print("Pas un float")
+        else :
+            return strg
+        if(strg[len(strg)-2:len(strg)]=="mV"):
+            return str(float(strg[0:len(strg)-2])/1000)+"V"
+        if(strg[0].isdigit()):
+            for i in range(0, len(strg)):
+                if(strg[i].isalpha() and strg[i]=="k"):
+                    return str(float(strg[0:i])*1000) + strg[i+1:len(strg)]
+        if(strg[len(strg)-5:len(strg)]=="minch"):
+            return str(float(strg[:len(strg)-5])* 25.4/1000)+"mm"
+        if(strg[len(strg)-4:len(strg)]=="inch"):
+            return str(float(strg[:len(strg)-4])* 25.4)+"mm"
+        return strg

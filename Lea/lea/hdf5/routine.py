@@ -56,21 +56,17 @@ def convert_files(adresse, adresse_s):
 		#regarde si le fichier est un .cine
 		#ou s'il n'y a pas de .cine il prend les .avi
 		if(get_extention(file)=="cine" or (get_extention(file)=="avi" and not(cine))):
-			cinefile = adresse + '/' + file  
+			cinefile = adresse + '/' + file
 			#On veut récupérer l'heure et la date
 			#Si le fichier n'a pas la date de son dossier il la prend
 			#Si le fichier n'a pas de date en titre il met alors date du fichier
 			try :
 				dir = int(name_dir)
-			except :
+			except ValueError:
 				date = time.strftime("%Y%m%d" , time.localtime(os.path.getmtime(cinefile)))
 				heure = time.strftime("%H%M" , time.localtime(os.path.getmtime(cinefile)))
-				print("Le nom du dossier doit être une date")
 			else :
-				if time.strftime("%y%m%d" , time.localtime(os.path.getmtime(cinefile)))==dir:
-					heure = time.strftime("%H%M" , time.localtime(os.path.getmtime(cinefile)))
-				else :
-					heure = "0000"
+				heure = time.strftime("%H%M" , time.localtime(os.path.getmtime(cinefile)))
 				if(len(name_dir)==6):
 					date = "20" + str(dir)
 				else :
@@ -81,6 +77,7 @@ def convert_files(adresse, adresse_s):
 			lh5py.obj_in_h5py(d, lh5py.file_name_in_dir(d, adresse_s))
 			index +=1
 		elif(get_extention(file) in ["tif", "jpeg", "png"]):
+			cinefile = adresse + '/' + file
 			date = time.strftime("%Y%m%d" , time.localtime(os.path.getmtime(cinefile)))
 			heure = time.strftime("%H%M" , time.localtime(os.path.getmtime(cinefile)))
 			d = data.Data(adresse + "/" + file, p, spec, index=index,date=date, heure=heure)
@@ -172,7 +169,7 @@ def errase_dir(ref):
 #convert_arbo("/media/ldupuy/Chicago2/Experiments_Princeton", "/home/ldupuy/Documents/Stage_Python_(2018)/new/Experiments_Princeton_hdf5/")
 #errase_dir("/home/ldupuy/Documents/Stage_Python_(2018)/new/Experiments_Princeton_hdf5")
 if __name__ == '__main__':
-	basefolder = '/media/stephane/DATA/Experimental_data/Turbulence3d'
+	basefolder = '/media/ldupuy/DATA/Experimental_data/Turbulence3d/20181126'
 	adresse_s = basefolder
 	#ref = "/media/stephane/OS/Documents and Settings/Stephane/Documents/Data_buffer/20181010"
 	#adresse_s = '/media/stephane/DATA/Experimental_data/Turbulence3d/20181010'

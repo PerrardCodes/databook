@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='lea_codes',
@@ -8,7 +8,7 @@ setup(
     author='Lea Dupuy',
     author_email='leadpy.gmail.com',
     license='GNU',
-    packages=['lea'],
+    packages=find_packages(),
     install_requires=['pandas'],
     zip_safe=True,
 )

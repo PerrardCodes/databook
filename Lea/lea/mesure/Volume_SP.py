@@ -5,7 +5,7 @@ import lea.mesure.pre_traitement as preT
 import lea.danjruth.piv as piv
 import stephane.cine.cine as cine
 
-#import lea.hdf5.h5py_convert as lh5py
+import lea.hdf5.h5py_convert as lh5py
 
 import matplotlib.pyplot as plt
 import glob
@@ -42,22 +42,22 @@ class Volume(mesure.Mesure):
             d = self.data
             f = self.m
             hdf5 = self.data.fichier
-            
+
         c = cine.Cine(d.fichier)
-        
+
         L,H = c.get_shape()
-        
+
         group = f
         temp = {}
         temp['instantV'] = {}
         temp['tV'] = {}
-        
+
         for n in range(0, len(group['instantV'])) :
             temp["instantV"][n] = group['instantV'][n].decode('UTF-8')
         for n in range(0, len(group['tV'])) :
             temp["tV"][n] = group['tV'][n].decode('UTF-8')
-            
-        
+
+
         for i in range(0, len(temp['instantV'])):
             un = make_tuple(temp['instantV'][i])[0]
             deux = make_tuple(temp['instantV'][i])[1]
@@ -73,7 +73,7 @@ class Volume(mesure.Mesure):
             file.close()
             print(nump.shape)
             del nump
-            
+
         f.close()
 
 
@@ -84,10 +84,11 @@ class Volume(mesure.Mesure):
         Dic = {}
         cinefile = self.data.fichier
         c = cine.Cine(cinefile)
-        if(self.data.param.fps[len(self.data.param.fps)-1]=="k"):
-            Dic['fps'] = (int(self.data.param.fps.rsplit("k",1)[0])*1000)
-        else :
+        if(type(self.data.param.fps) in [int, float]):
             Dic['fps'] = int(self.data.param.fps)
+        elif(self.data.param.fps[len(self.data.param.fps)-1]=="k"):
+            Dic['fps'] = (int(self.data.param.fps.rsplit("k",1)[0])*1000)
+
         #detecte les débuts et fin de Volumes
         #ft = 1./40000 #should be given directly by Data.param.ft
         Dic['dtmin'] = nmin*Dic['fps']#we look for jumps at least 10 times Dt
@@ -107,7 +108,7 @@ class Volume(mesure.Mesure):
         self.m['instantV']=instantV
         self.m['tV'] = tV
         self.m['CV'] = CV
-        
+
         return self
 
     def find_timejumps(self, c, Dic):
@@ -217,30 +218,47 @@ class Volume(mesure.Mesure):
     def get_im(self,i):
     	return super().get_im(self,i)
 
-    def get_volume(self, i):#adresse, adresse_s):            
+    def save_volume(self, savefolder):
+        d = self.data
+        Nt = len(self.m['tV'])
+
+        for i in range(Nt):
+            v0 = Volume(d,m={})
+
+            Vol,instant,t = self.get_volume(i)#Vol,instant,t
+
+            v0.m['volume'] = Vol
+            v0.m['instant'] = instant
+            v0.m['t'] = t
+
+            f = lh5py.file_name_in_dir(v0, savefolder)
+            lh5py.obj_in_h5py(v0, f)
+            f.close()
+
+
+
+    def get_volume(self, i):#adresse, adresse_s):
         c = cine.Cine(self.data.fichier)
-                
+
         L,H = c.get_frame(0).shape
-            
+
         start,end = (self.m['instantV'][i][0],self.m['instantV'][i][1])
-            #print(start,end)
-            #else:
-            #    start,end = self.m['instantV'][i]
+
         tV = self.m['tV'][i]
-            
+
         Nz = np.abs(start-end)+1
         Vol = np.zeros((Nz,L,H))
-            
+
         print(start,end)
         frames = np.arange(start,end+1,np.sign(end-start))
-                            
+
         for j,frame in enumerate(frames):
             Vol[j,...] = c.get_frame(frame)
-            
+
     #        self.m['volume']=Vol
     #        self.m['instant']=(start,end)
     #        self.m['t'] = tV[i] #be careful ! for some python object reason, self.m['tV'] erases m. Error not fixed by generating a new instance of volume
                 # as a consequence, the whole list of instantV and tV is stored on each file ... could be eventually removed
                 #save in a file
-    
+
         return Vol,(start,end),tV

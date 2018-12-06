@@ -16,10 +16,10 @@ import numpy as np
 class Piv3D(mesure.Mesure):
     def __init__(self, data, m={}):
         mesure.Mesure.__init__(self, data)
-        
+
         # load default parameters for the piv
         #self.load_piv_parameters()
-        
+
         self.m=m
 
     def load_piv_parameters(self):
@@ -32,7 +32,7 @@ class Piv3D(mesure.Mesure):
         if(hasattr(param, "fps")):
             if param.fps[-1]=='k':
                 self.fps = int(param.fps[:-1])*1000
-        
+
         self.frame_diff = int(self.fps/self.f)
         self.dt_origin = 1./self.frame_diff
 
@@ -44,7 +44,7 @@ class Piv3D(mesure.Mesure):
                 save=True, s2n_thresh=1.2, bg_n_frames=None, a_frames=""):
 
         param = self.data.param
-        
+
         frame_diff = self.fps/self.f
         #Crée un objet processing présent dans : danjruth.piv
         processing = p.PIVDataProcessing(parent_folder, cine_name, name_for_save=adresse_s, dx=fx, dt_orig=dt_origin,\
@@ -60,7 +60,7 @@ class Piv3D(mesure.Mesure):
             self.m['U'] = np.load(npy)
 
         return flowfield
-        
+
 
     def analysis3d(self, parent_folder, cine_name,volume_folder, adresse_s, npy=None, fx=1., dt_origin="", \
                 frame_diff="", crop_lims=None, maskers=None,\
@@ -75,7 +75,7 @@ class Piv3D(mesure.Mesure):
         if(hasattr(param, "f")):
             f = int(param.f[:-2])
         frame_diff = fps/f
-        
+
         #Crée un objet processing présent dans : danjruth.piv
         processing = p3d.PIVDataProcessing(parent_folder, cine_name, volume_folder, name_for_save=adresse_s, dx=fx, dt_orig=dt_origin,\
                                         frame_diff=frame_diff, crop_lims=crop_lims, maskers=maskers,\
@@ -100,10 +100,10 @@ class Piv3D(mesure.Mesure):
         #fx = self.fx
         #dt_origin = self.dt_origin
         self.load_piv_parameters()
-        
+
         frame_diff = int(self.frame_diff)
         self.data.nb_im = int(self.data.nb_im)
-        
+
         print(frame_diff)
         Ncpu = os.cpu_count()
         with Pool(processes=Ncpu) as pool:
@@ -131,7 +131,7 @@ class Piv3D(mesure.Mesure):
             np.save(parent_folder+adresse_s+'_flowfield.npy',flowfield)
         self.m['U'] = flowfield
         return self
-    
+
     def space_axis(self):
         ff = self.m['U']
         dx = self.m['dx']
@@ -143,7 +143,7 @@ class Piv3D(mesure.Mesure):
         y = np.arange(-(Ny-1)/2,(Ny-1)/2+1)*dx
         z = np.arange(-Nz/2,Nz/2)*dz-2
         [X,Z,Y] = np.meshgrid(x,z,y)
-        
+
         self.m['x'] = x
         self.m['y'] = y
         self.m['z'] = z
@@ -153,7 +153,7 @@ class Piv3D(mesure.Mesure):
         if 'np' in self.m.keys():
             print('np format')
             print(self.m['np'].shape)
-    
+
             # rename the field
             self.m['U']=M.PIV3D.m['np']
             self.m.pop('np')
@@ -182,13 +182,13 @@ class Piv3D(mesure.Mesure):
         ff = ff[:,:Nz//2,...]
         print(ff.shape)
 
-        
+
         # generate time axis
         dz = float(self.data.param.l_c)/frame_diff*2
         print(dz)
 
         self.m['overlap'] = 16
-        dx = float(self.data.param.fx*self.m['overlap'])        
+        dx = float(self.data.param.fx*self.m['overlap'])
         print(dx)
 
         self.m['dz'] = dz
@@ -206,20 +206,20 @@ class Piv3D(mesure.Mesure):
         print(cdata.nancount(ff))
         ff = ff[...,1:-1,1:-1,:]
         print(cdata.nancount(ff))
-        
+
         ff = cdata.remove_nan_3d(ff)
         print(cdata.nancount(ff))
-    
+
         self.m['U'] = ff
         self.compute_mean_flow()
-    
+
     def compute_mean_flow(self):
 #compute mean_flow
         ff = self.m['U']
         mean_flow = np.nanmean(ff,axis=0)
         mean_flow_speed = np.linalg.norm(mean_flow,axis=2)
         mean_speed = np.nanmean( np.sqrt(ff[...,0]**2 + ff[...,1]**2 ), axis=0)
-        fluc = ff - mean_flow    
+        fluc = ff - mean_flow
         u_rms = np.sqrt(np.nanmean(fluc[...,0]**2+fluc[...,1]**2 ,axis=0) )
 
         self.m['mean_flow'] = mean_flow
