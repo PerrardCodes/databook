@@ -4,7 +4,8 @@ import lea.mesure.Mesure as mesure
 import lea.mesure.pre_traitement as preT
 import lea.danjruth.piv as piv
 import stephane.cine.cine as cine
-import lea.hdf5.h5py_convert as lh5py
+
+#import lea.hdf5.h5py_convert as lh5py
 
 import matplotlib.pyplot as plt
 import glob
@@ -21,12 +22,18 @@ from ast import literal_eval as make_tuple
 class Volume(mesure.Mesure):
     def __init__(self, data, m={}):
         mesure.Mesure.__init__(self, data)
+        if m == {}:
+            print('Create object with no measurement file')
+        else:
+            print('Are you sure you want to generate a volume object with an already existing m field ?')
+#            self.m=m
         self.m=m
 
     def get_name(self):
         return "Volume"
 
     def get_volume_garbage(self, adresse, adresse_s, hdf5=None):
+        import lea.hdf5.h5py_convert as lh5py
         if type(hdf5)==str:
             f = lh5py.ouverture_fichier(hdf5)
             f = f["Mesure/Volume"]
@@ -44,11 +51,13 @@ class Volume(mesure.Mesure):
         temp = {}
         temp['instantV'] = {}
         temp['tV'] = {}
+        
         for n in range(0, len(group['instantV'])) :
             temp["instantV"][n] = group['instantV'][n].decode('UTF-8')
         for n in range(0, len(group['tV'])) :
             temp["tV"][n] = group['tV'][n].decode('UTF-8')
             
+        
         for i in range(0, len(temp['instantV'])):
             un = make_tuple(temp['instantV'][i])[0]
             deux = make_tuple(temp['instantV'][i])[1]
@@ -210,31 +219,28 @@ class Volume(mesure.Mesure):
 
     def get_volume(self, i):#adresse, adresse_s):            
         c = cine.Cine(self.data.fichier)
-            
+                
         L,H = c.get_frame(0).shape
-        
-#        print(self.m['tV'])
-#        print(self.m['instantV'])
-#        print(type(self.m['instantV'][i]))
-        
+            
         start,end = (self.m['instantV'][i][0],self.m['instantV'][i][1])
-        #print(start,end)
-        #else:
-        #    start,end = self.m['instantV'][i]
+            #print(start,end)
+            #else:
+            #    start,end = self.m['instantV'][i]
         tV = self.m['tV'][i]
-        
+            
         Nz = np.abs(start-end)+1
         Vol = np.zeros((Nz,L,H))
-        
+            
         print(start,end)
         frames = np.arange(start,end+1,np.sign(end-start))
-                        
+                            
         for j,frame in enumerate(frames):
             Vol[j,...] = c.get_frame(frame)
-        
-#        self.m['volume']=Vol
-#        self.m['instant']=(start,end)
-#        self.m['t'] = tV[i] #be careful ! for some python object reason, self.m['tV'] erases m. Error not fixed by generating a new instance of volume
-            # as a consequence, the whole list of instantV and tV is stored on each file ... could be eventually removed
-            #save in a file
+            
+    #        self.m['volume']=Vol
+    #        self.m['instant']=(start,end)
+    #        self.m['t'] = tV[i] #be careful ! for some python object reason, self.m['tV'] erases m. Error not fixed by generating a new instance of volume
+                # as a consequence, the whole list of instantV and tV is stored on each file ... could be eventually removed
+                #save in a file
+    
         return Vol,(start,end),tV

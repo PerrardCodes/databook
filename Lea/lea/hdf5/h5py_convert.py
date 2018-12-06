@@ -35,18 +35,21 @@ def obj_in_h5py(object, file, group=None, point='', attr=''):
 	if type(object) in [dict]:
 		for key, attr in object.items():
 			obj_in_h5py(object[key], file, group=group, point=key, attr=attr)
-	if type(object) in [list]:
+	if type(object) in [list,tuple]:
 		object = np.asarray(object)
-#		for i in range (0, len(attr)):		
-#			attr[i] = attr[i]#).encode("utf-8")
+		for i in range (0, len(attr)):		
+			attr[i] = attr[i]#.encode("utf-8")
 	if type(object) in [np.ndarray]:
 		dataname = group.name+'/'+point
 		if dataname not in file :
 			dset = file.create_dataset(dataname, data=attr, chunks=True)
 		else :
 			file[dataname][...] = attr
-	if type(object) in [bool, int, str, float, np.int64, np.float64]:
+	if type(object) in [bool, int, float, np.int64, np.float64]:
 		group.attrs[point] = attr
+	elif type(object) in [str]:
+                group.attrs[point] = attr.encode('utf-8') #encode it to avoid error due to special characters
+                
 
 #Crée et ouvre le fichier à une certaine adresse et grace à un objet
 #Si l'adresse n'existe pas il crée la crée.
@@ -54,7 +57,7 @@ def file_name_in_dir(object, adresse):
 	if not(os.path.exists(adresse)):
 		os.makedirs(adresse)
 	if(object.get_name()=="Data"):
-		name = str(object.id.date) + '_' + str(object.id.index) + '_' +  object.fichier.rsplit("/", 1)[1].split(".")[0] + ".hdf5"
+		name = cstr(object.id.date) + '_' + cstr(object.id.index) + '_' +  cstr(object.fichier.rsplit("/", 1)[1].split(".")[0]) + ".hdf5"
 	else:
 		name = str(object.data.id.date) + '_' + str(object.data.id.index) + '_' +  object.data.fichier.rsplit("/", 1)[1].split(".")[0] + ".hdf5"
 		count = len(glob.glob(adresse + "/Mesure_*" +name))
@@ -65,6 +68,9 @@ def file_name_in_dir(object, adresse):
 	#f = h5py.File(adresse + "/" + name, "r+")
 	return f
 
+def cstr(s):
+    return str(s.decode('utf-8'))
+    
 #Ouvre le fichier
 def ouverture_fichier(name, mode="r"):
 	#print(type(h5py))
@@ -124,7 +130,11 @@ def h5py_in_Mesure(f):
 		m.add_measurement(b)
 	if(f.__contains__("PIV3D")) :
 		p = h5py_in_piv3d(f, data)
+		m.add_measurement(p)		
+	if(f.__contains__("Volume")) :
+		p = h5py_in_Volume(f, data)
 		m.add_measurement(p)
+				
 	return m
 
 #récupère un file hdf5, un data et crée un objet Bulles
@@ -137,7 +147,7 @@ def h5py_in_obj(f,data=None):
         return h5py_in_Volume(f) 
 
 
-def h5py_in_Bulles(f, data):
+def h5py_in_Bulles(f,data=None):
 	group_b = f['Bulles']
 	m={}
 	temp={}
@@ -152,7 +162,7 @@ def h5py_in_Bulles(f, data):
 	b = bulles.Bulles(data, m=m)
 	return b
 	
-def h5py_in_Volume(f):
+def h5py_in_Volume(f, data=None):
 	group_v = f['Volume']
 	m={}
 	for attr in group_v :
@@ -163,8 +173,9 @@ def h5py_in_Volume(f):
 	#df = pd.DataFrame(data=temp)
 	#m["DF"] = df
 	f = f['Volume']
-	data = h5py_in_Data(f)
-	
+	if data == None:
+	       data = h5py_in_Data(f)
+            
 	v = volume.Volume(data, m=m)
 	return v
 

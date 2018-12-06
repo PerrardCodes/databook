@@ -123,7 +123,7 @@ class PIVDataProcessing:
         
         nx,ny = process.get_field_shape(frame_shape,window_size,overlap)
 
-        windowz = 32
+        windowz = 16
         a=3 #for the smoothing operation along z
         startz = (volume_a.shape[0]%windowz)//2 #reste dans la division par windowz
         endz = startz+windowz
@@ -151,8 +151,8 @@ class PIVDataProcessing:
         #### process along xz ####
         print('Process along xz')
 
-        window_size = [32,32]
-        overlap = [16,16]
+        window_size = [16,32]
+        overlap = [8,16]
         frame_shape = (Nz,Nx)
         a=3 #for the smoothing operation along y
         
@@ -176,8 +176,8 @@ class PIVDataProcessing:
         ### process along yz ###
         print('Process along yz')
 
-        window_size = [32,32]
-        overlap = [16,16]
+        window_size = [16,32]
+        overlap = [8,16]
         frame_shape = (Nz,Ny)
         a=3 #for the smoothing operation along y
         

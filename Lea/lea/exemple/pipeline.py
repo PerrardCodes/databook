@@ -17,8 +17,8 @@ import numpy as np
 import os
 import glob
 import time
-
 import sys
+from importlib import reload
 
 def ask(folder,ext='*.cine'):
     l=glob.glob(folder+ext)
@@ -44,15 +44,17 @@ base = '/Volumes/Diderot/DATA_Princeton_November2018/'
 date = '20181127'
 datafolder = base+date+'/'
 
-savefolder = '/Users/stephane/Documents/Postdoc_Princeton/Piv3d/'+date
+savefolder = '/Users/stephane/Documents/Postdoc_Princeton/Piv3d/'+date+'/'
 
 
 #generate the data file associated to all cine in the datafolder
-routine.convert_arbo(datafolder, savefolder)
+#routine.convert_arbo(datafolder, savefolder)
 
 #stophere
 #get the cinefile to be processed 
 cinefile = ask(datafolder)
+
+savefolder = '/Users/stephane/Documents/Postdoc_Princeton/Piv3d/'+date+'/'+os.path.basename(cinefile).rsplit('.',1)[0]
 
 # get the datafile associated to that cine. If the cine was not found, just look for it in the list
 if cinefile is not None:
@@ -63,22 +65,37 @@ else:
 # load the datafile
 f = lh5py.ouverture_fichier(datafile)
 d = lh5py.h5py_in_Data(f)
+#d2 = lh5py.h5py_in_Data(f)
 f.close()
 
 #compute the volume on the first 200 frames
 m = lmesure.Mesure(d)
-v = lvolume.Volume(d)
-v = v.volume(nb_im=2040)
 
-m.add_measurement(v)
-    
-# save the measure of volume in a hdf5 file    
-f = lh5py.file_name_in_dir(m, savefolder + '/Volume_Correlation'+ "/")
-lh5py.obj_in_h5py(m, f)
+#v = lvolume.Volume(d)
+#v = v.volume(nb_im=2040)
+
+#open a volume hdf5 file
+volumefile = ask(savefolder + '/Volume_Correlation'+ "/",ext='*.hdf5')
+
+f = lh5py.ouverture_fichier(volumefile)
+m = lh5py.h5py_in_Mesure(f)
 f.close()
 
+#print(m.__dict__)
+#stophere
 
-stophere
+#m.add_measurement(v)
+    
+# save the measure of volume in a hdf5 file    
+#f = lh5py.file_name_in_dir(m, savefolder + '/Volume_Correlation'+ "/")
+#lh5py.obj_in_h5py(m, f)
+#f.close()
+
+
+
+
+#stophere
+v = m.Volume
 
 Nt = len(v.m['tV'])
 
@@ -86,29 +103,26 @@ temp = {}
 temp['instantV'] = []
 temp['tV'] = []
 
-for n in range(len(v.m['instantV'])) :
-    temp['instantV'].append(v.m['instantV'][n])#.decode('UTF-8')
-for n in range(len(v.m['tV'])) :
-    temp['tV'].append(v.m['tV'][n])#.decode('UTF-8')
 
-print(temp['tV'])
-
+#for n in range(len(v.m['instantV'])) :
+#    temp['instantV'].append(v.m['instantV'][n])#.decode('UTF-8')
+#for n in range(len(v.m['tV'])) :
+#    temp['tV'].append(v.m['tV'][n])#.decode('UTF-8')
+#print(temp['tV'])
 for i in range(Nt):
-    m = lmesure.Mesure(d)
+    v0 = lvolume.Volume(d,m={})#,m={})
+    Vol,instant,t = v.get_volume(i)#Vol,instant,t
+    #v0.m={}
 
-    print(temp['tV'])
-    Vol,instant,t = v.get_volume(i)
-    
-    v0 = lvolume.Volume(d)
-    
     v0.m['volume'] = Vol
     v0.m['instant'] = instant
     v0.m['t'] = t
-    
+        
     f = lh5py.file_name_in_dir(v0, savefolder + '/Volume'+ "/")
     lh5py.obj_in_h5py(v0, f)
     f.close()
 
+#    del Vol,instant,t,v0
 #    m.add_measurement(v0)
     
 # save the measure of volume in a hdf5 file    
