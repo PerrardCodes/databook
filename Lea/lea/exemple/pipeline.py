@@ -98,6 +98,10 @@ v = m.Volume
 
 Nt = len(v.m['tV'])
 
+<<<<<<< Updated upstream
+=======
+temp = {}
+>>>>>>> Stashed changes
 
 for i in range(Nt):
     v0 = lvolume.Volume(d,m={})#,m={})
@@ -119,7 +123,6 @@ for i in range(Nt):
 #    f = lh5py.file_name_in_dir(m, savefolder + '/Volume'+ "/")
 #    lh5py.obj_in_h5py(m, f)
 #    f.close()
-
 #stophere
 
 
