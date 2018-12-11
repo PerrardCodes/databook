@@ -106,12 +106,32 @@ class Piv3D(mesure.Mesure):
 
         print(frame_diff)
         Ncpu = os.cpu_count()
+        print(Ncpu)
+        print(frame_diff/Ncpu)
+        print(Ncpu/frame_diff)
+        if Ncpu>frame_diff and Ncpu%frame_diff>0:
+            Ncpu = Ncpu-Ncpu%frame_diff
         with Pool(processes=Ncpu) as pool:
             ite = []
-            for i in range(frame_diff):
-                #self.data.nb_im
-                #self.data.nb_im
-                ite.append(np.arange(i,self.data.nb_im-frame_diff, frame_diff))
+            if frame_diff==1: 
+                for i in range(Ncpu):
+                    ite.append(np.arange(i*2,self.data.nb_im-frame_diff, Ncpu*2))
+                for i in range(Ncpu):
+                    ite.append(np.arange(i*2+1,self.data.nb_im-frame_diff, Ncpu*2))
+            elif Ncpu<=frame_diff:
+                if frame_diff%Ncpu==0:
+                    print('Algorithm optimal')
+                for i in range(frame_diff):
+                    ite.append(np.arange(i,self.data.nb_im-frame_diff,frame_diff))
+            else: # each cpu will work twice : one time on indices [0,2*Ncpu, ...] one time on indices [frame_diff,frame_diff+2*Ncpu]
+                for i in range(Ncpu/frame_diff):
+                    for j in range(frame_diff):
+                        ite.append(np.arange(i*2*frame_diff+j,self.data.nb_im-frame_diff,2*Ncpu))
+                for i in range(Ncpu/frame_diff):
+                    for j in range(frame_diff):
+                        ite.append(np.arange(i*2*frame_diff+j+frame_diff,self.data.nb_im-frame_diff,2*Ncpu))
+
+                
 	        #ite = [(0,25), (26, 50), (51, 75), (76, 100)]
             func = partial(self.analysis, parent_folder, cine_name, adresse_s, npy, self.fx, self.dt_origin,frame_diff, crop_lims, maskers, window_size, overlap, search_area_size, save, s2n_thresh, bg_n_frames)
             f = pool.map(func, ite)
