@@ -98,10 +98,6 @@ v = m.Volume
 
 Nt = len(v.m['tV'])
 
-<<<<<<< Updated upstream
-=======
-temp = {}
->>>>>>> Stashed changes
 
 for i in range(Nt):
     v0 = lvolume.Volume(d,m={})#,m={})
