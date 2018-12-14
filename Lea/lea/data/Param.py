@@ -70,13 +70,13 @@ def define_type(strg):
         try:
             strg = int(strg)
         except ValueError:
-            print("Pas un int")
+            pass
         else :
             return strg
         try:
             strg = float(strg)
         except ValueError:
-            print("Pas un float")
+            pass
         else :
             return strg
         if(strg[len(strg)-2:len(strg)]=="mV"):

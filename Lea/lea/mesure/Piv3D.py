@@ -30,10 +30,11 @@ class Piv3D(mesure.Mesure):
             if param.galvo[-1]=='k':
                 self.f = int(param.galvo[:-1])*1000
         if(hasattr(param, "fps")):
-            if param.fps[-1]=='k':
-                self.fps = int(param.fps[:-1])*1000
-
-        self.frame_diff = int(self.fps/self.f)
+            self.fps = int(param.fps)
+        if(hasattr(param, "frame_diff")):
+            self.frame_diff=param.frame_diff
+        else :
+            self.frame_diff = int(self.fps/self.f)
         self.dt_origin = 1./self.frame_diff
 
 
@@ -45,7 +46,10 @@ class Piv3D(mesure.Mesure):
 
         param = self.data.param
 
-        frame_diff = self.fps/self.f
+        if(hasattr(self, "frame_diff")):
+            frame_diff=self.frame_diff
+        else :
+            frame_diff = self.fps/self.f
         #Crée un objet processing présent dans : danjruth.piv
         processing = p.PIVDataProcessing(parent_folder, cine_name, name_for_save=adresse_s, dx=fx, dt_orig=dt_origin,\
                                         frame_diff=frame_diff, crop_lims=crop_lims, maskers=maskers,\
@@ -113,7 +117,7 @@ class Piv3D(mesure.Mesure):
             Ncpu = Ncpu-Ncpu%frame_diff
         with Pool(processes=Ncpu) as pool:
             ite = []
-            if frame_diff==1: 
+            if frame_diff==1:
                 for i in range(Ncpu):
                     ite.append(np.arange(i*2,self.data.nb_im-frame_diff, Ncpu*2))
                 for i in range(Ncpu):
@@ -124,14 +128,14 @@ class Piv3D(mesure.Mesure):
                 for i in range(frame_diff):
                     ite.append(np.arange(i,self.data.nb_im-frame_diff,frame_diff))
             else: # each cpu will work twice : one time on indices [0,2*Ncpu, ...] one time on indices [frame_diff,frame_diff+2*Ncpu]
-                for i in range(Ncpu/frame_diff):
+                for i in range(Ncpu//frame_diff):
                     for j in range(frame_diff):
                         ite.append(np.arange(i*2*frame_diff+j,self.data.nb_im-frame_diff,2*Ncpu))
-                for i in range(Ncpu/frame_diff):
+                for i in range(Ncpu//frame_diff):
                     for j in range(frame_diff):
                         ite.append(np.arange(i*2*frame_diff+j+frame_diff,self.data.nb_im-frame_diff,2*Ncpu))
 
-                
+
 	        #ite = [(0,25), (26, 50), (51, 75), (76, 100)]
             func = partial(self.analysis, parent_folder, cine_name, adresse_s, npy, self.fx, self.dt_origin,frame_diff, crop_lims, maskers, window_size, overlap, search_area_size, save, s2n_thresh, bg_n_frames)
             f = pool.map(func, ite)

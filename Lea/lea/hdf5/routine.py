@@ -169,7 +169,7 @@ def errase_dir(ref):
 #convert_arbo("/media/ldupuy/Chicago2/Experiments_Princeton", "/home/ldupuy/Documents/Stage_Python_(2018)/new/Experiments_Princeton_hdf5/")
 #errase_dir("/home/ldupuy/Documents/Stage_Python_(2018)/new/Experiments_Princeton_hdf5")
 if __name__ == '__main__':
-	basefolder = '/media/ldupuy/DATA/Experimental_data/Turbulence3d/20181126'
+	basefolder = '/media/stephane/DATA/Experimental_data/Turbulence3d/20181211'
 	adresse_s = basefolder
 	#ref = "/media/stephane/OS/Documents and Settings/Stephane/Documents/Data_buffer/20181010"
 	#adresse_s = '/media/stephane/DATA/Experimental_data/Turbulence3d/20181010'

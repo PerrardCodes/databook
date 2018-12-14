@@ -40,11 +40,12 @@ def ask(folder,ext='*.cine'):
             return None
 
 
-base = '/media/ldupuy/DATA/Experimental_data/Turbulence3d/'
-date = '20181126'
+base = '/media/stephane/DATA/Experimental_data/Turbulence3d'
+#'/media/ldupuy/DATA/Experimental_data/Turbulence3d/'
+date = '20181211'
 datafolder = base+date+'/'
 
-savefolder = 'media/ldupuy/DATA/Experimental_data/Turbulence3d/'+date+'/'
+savefolder =base+date+'/'
 
 
 #generate the data file associated to all cine in the datafolder
