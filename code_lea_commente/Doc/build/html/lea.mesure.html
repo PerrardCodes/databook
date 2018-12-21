@@ -1,0 +1,803 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>lea.mesure package &#8212; Documentation Databook 1.0</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="lea.exemple package" href="lea.exemple.html" />
+    <link rel="prev" title="lea.hdf5 package" href="lea.hdf5.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lea.exemple.html" title="lea.exemple package"
+             accesskey="N">suivant</a> |</li>
+        <li class="right" >
+          <a href="lea.hdf5.html" title="lea.hdf5 package"
+             accesskey="P">précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Documentation Databook 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="lea.html" accesskey="U">lea package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lea-mesure-package">
+<h1>lea.mesure package<a class="headerlink" href="#lea-mesure-package" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="module-lea.mesure.Mesure">
+<span id="lea-mesure-mesure-module"></span><h2>lea.mesure.Mesure module<a class="headerlink" href="#module-lea.mesure.Mesure" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="class">
+<dt id="lea.mesure.Mesure.Mesure">
+<em class="property">class </em><code class="descclassname">lea.mesure.Mesure.</code><code class="descname">Mesure</code><span class="sig-paren">(</span><em>data=''</em>, <em>historique={}</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Mesure.Mesure" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Bases : <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(disponible dans Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>data</strong> (<em>Data Object</em>) – Objet contenant les paramètres</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="lea.mesure.Mesure.Mesure.add_measurement">
+<code class="descname">add_measurement</code><span class="sig-paren">(</span><em>obj</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Mesure.Mesure.add_measurement" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Ajoute un paramètre à Mesure, si c’est un objet il ajoute l’attribut avec pour nom le nom de la classe qu’on a récupéré grâce à la méthode <a class="reference internal" href="#lea.mesure.Mesure.Mesure.get_name" title="lea.mesure.Mesure.Mesure.get_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_name()</span></code></a> sinon il l’ajoute avec le nom donné en paramètre</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Mesure.Mesure.get_im">
+<code class="descname">get_im</code><span class="sig-paren">(</span><em>object</em>, <em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Mesure.Mesure.get_im" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Mesure.Mesure.get_name">
+<code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Mesure.Mesure.get_name" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">Le nom de l’objet, ici «&nbsp;Mesure&nbsp;»</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Avertissement</p>
+<p class="last">Fonction nécessaire à toute les classes lors qu’on veut les convertir en hdf5</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-lea.mesure.Bulles">
+<span id="lea-mesure-bulles-module"></span><h2>lea.mesure.Bulles module<a class="headerlink" href="#module-lea.mesure.Bulles" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="class">
+<dt id="lea.mesure.Bulles.Bulles">
+<em class="property">class </em><code class="descclassname">lea.mesure.Bulles.</code><code class="descname">Bulles</code><span class="sig-paren">(</span><em>data</em>, <em>m={}</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Bulles.Bulles" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Bases : <a class="reference internal" href="#lea.mesure.Mesure.Mesure" title="lea.mesure.Mesure.Mesure"><code class="xref py py-class docutils literal notranslate"><span class="pre">lea.mesure.Mesure.Mesure</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(disponible dans Python v3.7)"><em>dict</em></a>) – Contient toutes les informations obtenues lorsqu’on a lancé le traitement.</td>
+</tr>
+</tbody>
+</table>
+<p>Contient le même data que celui de sa classe mère Mesure, il est nécessaire d’avoir les informations en double notamment si on change des paramètres.</p>
+<dl class="method">
+<dt id="lea.mesure.Bulles.Bulles.add_measurement">
+<code class="descname">add_measurement</code><span class="sig-paren">(</span><em>obj</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Bulles.Bulles.add_measurement" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Ajoute un paramètre à Bulles, si c’est un objet il ajoute l’attribut avec pour nom le nom de la classe qu’on a récupéré grâce à la méthode <a class="reference internal" href="#lea.mesure.Bulles.Bulles.get_name" title="lea.mesure.Bulles.Bulles.get_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_name()</span></code></a> sinon il l’ajoute avec le nom donné en paramètre</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Bulles.Bulles.bulle">
+<code class="descname">bulle</code><span class="sig-paren">(</span><em>filename</em>, <em>fx=0.0</em>, <em>fps=1.0</em>, <em>D=0</em>, <em>xmin=0</em>, <em>xmax=-1</em>, <em>ymin=0</em>, <em>ymax=-1</em>, <em>x0=0</em>, <em>y0=0</em>, <em>p_im=0</em>, <em>nb_im=0</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Bulles.Bulles.bulle" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>La fonction bulle est tirée du code de fluids2d.backlight de danjruth
+Elle ajoute dynamiquement dans un fichier hdf5 passé en paramètre</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<em>h5py files</em>) – Fichier où seront stocké les données calculées</li>
+<li><strong>xmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Pour crop l’image, de base à 0</li>
+<li><strong>xmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Pour crop l’image, de base à -1 et si non définit il prend le maximum de l’axe x</li>
+<li><strong>ymin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Pour crop l’image, de base à 0</li>
+<li><strong>ymax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Pour crop l’image, de base à -1 et si non définit il prend le maximum de l’axe y</li>
+<li><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Le centre en x, il faut indiquer le centre avant que l’image ne soit crop.</li>
+<li><strong>y0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Le centre en y, il faut indiquer le centre avant que l’image ne soit crop.</li>
+<li><strong>p_im</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Première image à traiter</li>
+<li><strong>nb_im</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Dernière image à traiter, si égale à 0 elle est mise au nombre maximum d’image</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Pour les autres paramètres il récupère ceux nécessaire dans le fichier data, sinon il met les valeurs passées en paramètre</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Bulles.Bulles.get_name">
+<code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Bulles.Bulles.get_name" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">Le nom de l’objet, ici «&nbsp;Bulles&nbsp;»</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Avertissement</p>
+<p class="last">Fonction nécessaire à toute les classes lors qu’on veut les convertir en hdf5</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-lea.mesure.Contour">
+<span id="lea-mesure-contour-module"></span><h2>lea.mesure.Contour module<a class="headerlink" href="#module-lea.mesure.Contour" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="class">
+<dt id="lea.mesure.Contour.Contour">
+<em class="property">class </em><code class="descclassname">lea.mesure.Contour.</code><code class="descname">Contour</code><span class="sig-paren">(</span><em>data</em>, <em>m={}</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Contour.Contour" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Bases : <a class="reference internal" href="#lea.mesure.Mesure.Mesure" title="lea.mesure.Mesure.Mesure"><code class="xref py py-class docutils literal notranslate"><span class="pre">lea.mesure.Mesure.Mesure</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(disponible dans Python v3.7)"><em>dict</em></a>) – Contient toutes les informations obtenues lorsqu’on a lancé le traitement.</td>
+</tr>
+</tbody>
+</table>
+<p>Contient le même data que celui de sa classe mère Mesure, il est nécessaire d’avoir les informations en double notamment si on change des paramètres.</p>
+<dl class="method">
+<dt id="lea.mesure.Contour.Contour.add_measurement">
+<code class="descname">add_measurement</code><span class="sig-paren">(</span><em>obj</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Contour.Contour.add_measurement" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Ajoute un paramètre à Contour, si c’est un objet il ajoute l’attribut avec pour nom le nom de la classe qu’on a récupéré grâce à la méthode <a class="reference internal" href="#lea.mesure.Contour.Contour.get_name" title="lea.mesure.Contour.Contour.get_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_name()</span></code></a> sinon il l’ajoute avec le nom donné en paramètre</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Contour.Contour.contour_RAM">
+<code class="descname">contour_RAM</code><span class="sig-paren">(</span><em>fx=0.0</em>, <em>fps=1.0</em>, <em>D=0</em>, <em>xmin=0</em>, <em>xmax=-1</em>, <em>ymin=0</em>, <em>ymax=-1</em>, <em>x0=0</em>, <em>y0=0</em>, <em>im_save=50</em>, <em>adresse_s=''</em>, <em>rmin=10</em>, <em>rmax=30</em>, <em>B=5</em>, <em>thetamin=0.7</em>, <em>thetamax=0.15</em>, <em>nb_im=0</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Contour.Contour.contour_RAM" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Cette fonction récupère les contours d’un ballon et grâce à la fonction :func: <cite>contour</cite>. Lors de son utilisation avec un film celui-ci est stocké entièrement dans la RAM (c’est à dire qu’il charge en premier toutes les images ou tout le film puis le traite en suite), il faut préférer utiliser <a class="reference internal" href="#lea.mesure.Contour.Contour.contour_instant" title="lea.mesure.Contour.Contour.contour_instant"><code class="xref py py-func docutils literal notranslate"><span class="pre">contour_instant()</span></code></a> ou <a class="reference internal" href="#lea.mesure.Contour.Contour.contour_multi_proc" title="lea.mesure.Contour.Contour.contour_multi_proc"><code class="xref py py-func docutils literal notranslate"><span class="pre">contour_multi_proc()</span></code></a> pour l’utilisation du multiprocessing python</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>fx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(disponible dans Python v3.7)"><em>float</em></a>) – spacial scale</li>
+<li><strong>fps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(disponible dans Python v3.7)"><em>float</em></a>) – Utilisé pour calculer le ft</li>
+<li><strong>D</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(disponible dans Python v3.7)"><em>float</em></a>) – Diametre initial</li>
+<li><strong>xmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Pour crop l’image, de base à 0</li>
+<li><strong>xmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Pour crop l’image, de base à -1 et si non définit il prend le maximum de l’axe x</li>
+<li><strong>ymin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Pour crop l’image, de base à 0</li>
+<li><strong>ymax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Pour crop l’image, de base à -1 et si non définit il prend le maximum de l’axe y</li>
+<li><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Le centre en x, il faut indiquer le centre avant que l’image ne soit crop.</li>
+<li><strong>y0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Le centre en y, il faut indiquer le centre avant que l’image ne soit crop.</li>
+<li><strong>im_save</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Image à sauvegarder</li>
+<li><strong>adresse_s</strong> (<em>adresse du fichier</em>) – Où sauvegarder l’image</li>
+<li><strong>rmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – rmin et rmax servent à savoir à quelle distance on doit mettre les points</li>
+<li><strong>rmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – rmin et rmax servent à savoir à quelle distance on doit mettre les points</li>
+<li><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – N est le nombre de droite (N = pi* (rmin-rmax) <a href="#id1"><span class="problematic" id="id2">*</span></a>B)</li>
+<li><strong>nr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – nr est le nombre de point par droite (nr = (rmax-rmin)*B)</li>
+<li><strong>nb_im</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Dernière image à traiter, si égale à 0 elle est mise au nombre maximum d’image</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body"><p class="first last">Objet Contour</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Contour.Contour.contour_instant">
+<code class="descname">contour_instant</code><span class="sig-paren">(</span><em>fx=0.0</em>, <em>fps=1.0</em>, <em>D=0</em>, <em>xmin=0</em>, <em>xmax=-1</em>, <em>ymin=0</em>, <em>ymax=-1</em>, <em>x0=0</em>, <em>y0=0</em>, <em>im_save=50</em>, <em>adresse_s=''</em>, <em>rmin=10</em>, <em>rmax=30</em>, <em>B=5</em>, <em>thetamin=0.7</em>, <em>thetamax=0.15</em>, <em>p_im=0</em>, <em>nb_im=0</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Contour.Contour.contour_instant" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Cette fonction récupère les contours d’un ballon et grâce à la fonction :func: <cite>contour</cite>. Le film n’est pas stocké dans la RAM, c’est à dire qu’il récupère une image, la traite, puis passe à la suivante, pour plus d’efficacité utiliser la fonction <a class="reference internal" href="#lea.mesure.Contour.Contour.contour_multi_proc" title="lea.mesure.Contour.Contour.contour_multi_proc"><code class="xref py py-func docutils literal notranslate"><span class="pre">contour_multi_proc()</span></code></a> pour l’utilisation du multiprocessing python</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>fx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(disponible dans Python v3.7)"><em>float</em></a>) – spacial scale</li>
+<li><strong>fps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(disponible dans Python v3.7)"><em>float</em></a>) – Utilisé pour calculer le ft</li>
+<li><strong>D</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(disponible dans Python v3.7)"><em>float</em></a>) – Diametre initial</li>
+<li><strong>xmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Pour crop l’image, de base à 0</li>
+<li><strong>xmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Pour crop l’image, de base à -1 et si non définit il prend le maximum de l’axe x</li>
+<li><strong>ymin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Pour crop l’image, de base à 0</li>
+<li><strong>ymax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Pour crop l’image, de base à -1 et si non définit il prend le maximum de l’axe y</li>
+<li><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Le centre en x, il faut indiquer le centre avant que l’image ne soit crop.</li>
+<li><strong>y0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Le centre en y, il faut indiquer le centre avant que l’image ne soit crop.</li>
+<li><strong>im_save</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Image à sauvegarder</li>
+<li><strong>adresse_s</strong> (<em>adresse du fichier</em>) – Où sauvegarder l’image</li>
+<li><strong>rmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – rmin et rmax servent à savoir à quelle distance on doit mettre les points</li>
+<li><strong>rmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – rmin et rmax servent à savoir à quelle distance on doit mettre les points</li>
+<li><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – N est le nombre de droite (N = pi* (rmin-rmax) <a href="#id3"><span class="problematic" id="id4">*</span></a>B)</li>
+<li><strong>nr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – nr est le nombre de point par droite (nr = (rmax-rmin)*B)</li>
+<li><strong>p_im</strong> – Première image à traiter, de base mise à 0</li>
+<li><strong>nb_im</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Dernière image à traiter, si égale à 0 elle est mise au nombre maximum d’image</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body"><p class="first last">Objet Contour</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Contour.Contour.contour_multi_proc">
+<code class="descname">contour_multi_proc</code><span class="sig-paren">(</span><em>nb_im=0</em>, <em>fx=0.0</em>, <em>fps=1.0</em>, <em>D=0</em>, <em>xmin=0</em>, <em>xmax=-1</em>, <em>ymin=0</em>, <em>ymax=-1</em>, <em>x0=0</em>, <em>y0=0</em>, <em>im_save=50</em>, <em>adresse_s=''</em>, <em>rmin=10</em>, <em>rmax=30</em>, <em>B=5</em>, <em>thetamin=0.7</em>, <em>thetamax=0.15</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Contour.Contour.contour_multi_proc" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Utilise la fonction <a class="reference internal" href="#lea.mesure.Contour.Contour.contour_instant" title="lea.mesure.Contour.Contour.contour_instant"><code class="xref py py-func docutils literal notranslate"><span class="pre">contour_instant()</span></code></a> et l’optimise avec du multiprocessing</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Contour.Contour.get_im">
+<code class="descname">get_im</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Contour.Contour.get_im" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Contour.Contour.get_name">
+<code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Contour.Contour.get_name" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">Le nom de l’objet, ici «&nbsp;Contour&nbsp;»</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Avertissement</p>
+<p class="last">Fonction nécessaire à toute les classes lors qu’on veut les convertir en hdf5</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Contour.Contour.merge">
+<code class="descname">merge</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Contour.Contour.merge" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Contour.Contour.merge_all">
+<code class="descname">merge_all</code><span class="sig-paren">(</span><em>tab</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Contour.Contour.merge_all" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.Contour.contour">
+<code class="descclassname">lea.mesure.Contour.</code><code class="descname">contour</code><span class="sig-paren">(</span><em>im</em>, <em>Dic</em>, <em>display=True</em>, <em>save='test.png'</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Contour.contour" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonction de mesure</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.Contour.lissage">
+<code class="descclassname">lea.mesure.Contour.</code><code class="descname">lissage</code><span class="sig-paren">(</span><em>DF</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Contour.lissage" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Si jamais un point est beaucoup torp loin de ses deux voisins il est remis au bon endroit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lea.mesure.Piv3D">
+<span id="lea-mesure-piv3d-module"></span><h2>lea.mesure.Piv3D module<a class="headerlink" href="#module-lea.mesure.Piv3D" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="class">
+<dt id="lea.mesure.Piv3D.Piv3D">
+<em class="property">class </em><code class="descclassname">lea.mesure.Piv3D.</code><code class="descname">Piv3D</code><span class="sig-paren">(</span><em>data</em>, <em>m={}</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Piv3D.Piv3D" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Bases : <a class="reference internal" href="#lea.mesure.Mesure.Mesure" title="lea.mesure.Mesure.Mesure"><code class="xref py py-class docutils literal notranslate"><span class="pre">lea.mesure.Mesure.Mesure</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(disponible dans Python v3.7)"><em>dict</em></a>) – Contient toutes les informations obtenues lorsqu’on a lancé le traitement.</td>
+</tr>
+</tbody>
+</table>
+<p>Contient le même data que celui de sa classe mère Mesure, il est nécessaire d’avoir les informations en double notamment si on change des paramètres.</p>
+<dl class="method">
+<dt id="lea.mesure.Piv3D.Piv3D.add_measurement">
+<code class="descname">add_measurement</code><span class="sig-paren">(</span><em>obj</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Piv3D.Piv3D.add_measurement" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Ajoute un paramètre à Piv3D, si c’est un objet il ajoute l’attribut avec pour nom le nom de la classe qu’on a récupéré grâce à la méthode <a class="reference internal" href="#lea.mesure.Piv3D.Piv3D.get_name" title="lea.mesure.Piv3D.Piv3D.get_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_name()</span></code></a> sinon il l’ajoute avec le nom donné en paramètre</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Piv3D.Piv3D.analysis">
+<code class="descname">analysis</code><span class="sig-paren">(</span><em>parent_folder</em>, <em>cine_name</em>, <em>adresse_s</em>, <em>npy=None</em>, <em>fx=1.0</em>, <em>dt_origin=''</em>, <em>frame_diff=''</em>, <em>crop_lims=None</em>, <em>maskers=None</em>, <em>window_size=32</em>, <em>overlap=16</em>, <em>search_area_size=32</em>, <em>save=True</em>, <em>s2n_thresh=1.2</em>, <em>bg_n_frames=None</em>, <em>a_frames=''</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Piv3D.Piv3D.analysis" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Lance et stocke dans un objet le code présent dans danjruth.piv</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Piv3D.Piv3D.analysis_multi_proc">
+<code class="descname">analysis_multi_proc</code><span class="sig-paren">(</span><em>parent_folder</em>, <em>cine_name</em>, <em>adresse_s</em>, <em>npy=None</em>, <em>fx=1.0</em>, <em>dt_origin=''</em>, <em>frame_diff=''</em>, <em>crop_lims=None</em>, <em>maskers=None</em>, <em>window_size=32</em>, <em>overlap=16</em>, <em>search_area_size=32</em>, <em>save=True</em>, <em>s2n_thresh=1.2</em>, <em>bg_n_frames=None</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Piv3D.Piv3D.analysis_multi_proc" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Lance la fonction <a class="reference internal" href="#lea.mesure.Piv3D.Piv3D.analysis" title="lea.mesure.Piv3D.Piv3D.analysis"><code class="xref py py-func docutils literal notranslate"><span class="pre">analysis()</span></code></a> en multiprocessing</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Piv3D.Piv3D.compute_mean_flow">
+<code class="descname">compute_mean_flow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Piv3D.Piv3D.compute_mean_flow" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Piv3D.Piv3D.from2d_to3d">
+<code class="descname">from2d_to3d</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Piv3D.Piv3D.from2d_to3d" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Piv3D.Piv3D.get_name">
+<code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Piv3D.Piv3D.get_name" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">Le nom de l’objet, ici «&nbsp;PIV3D&nbsp;»</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Avertissement</p>
+<p class="last">Fonction nécessaire à toute les classes lors qu’on veut les convertir en hdf5</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Piv3D.Piv3D.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>npy</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Piv3D.Piv3D.load" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Piv3D.Piv3D.load_piv_parameters">
+<code class="descname">load_piv_parameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Piv3D.Piv3D.load_piv_parameters" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Load les paramètres suivant dans un dictionnaire :</p>
+<ul class="simple">
+<li>fx</li>
+<li>f</li>
+<li>fps</li>
+<li>frame_diff</li>
+<li>dt_origin</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Piv3D.Piv3D.space_axis">
+<code class="descname">space_axis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Piv3D.Piv3D.space_axis" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-lea.mesure.Volume_LD">
+<span id="lea-mesure-volume-ld-module"></span><h2>lea.mesure.Volume_LD module<a class="headerlink" href="#module-lea.mesure.Volume_LD" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="class">
+<dt id="lea.mesure.Volume_LD.Volume">
+<em class="property">class </em><code class="descclassname">lea.mesure.Volume_LD.</code><code class="descname">Volume</code><span class="sig-paren">(</span><em>data</em>, <em>m={}</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Volume_LD.Volume" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Bases : <a class="reference internal" href="#lea.mesure.Mesure.Mesure" title="lea.mesure.Mesure.Mesure"><code class="xref py py-class docutils literal notranslate"><span class="pre">lea.mesure.Mesure.Mesure</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(disponible dans Python v3.7)"><em>dict</em></a>) – Contient toutes les informations obtenues lorsqu’on a lancé le traitement.</td>
+</tr>
+</tbody>
+</table>
+<p>Contient le même data que celui de sa classe mère Mesure, il est nécessaire d’avoir les informations en double notamment si on change des paramètres.</p>
+<dl class="method">
+<dt id="lea.mesure.Volume_LD.Volume.analysis_multi_proc">
+<code class="descname">analysis_multi_proc</code><span class="sig-paren">(</span><em>c</em>, <em>instant</em>, <em>Dic</em>, <em>Nz=20</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Volume_LD.Volume.analysis_multi_proc" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Volume_LD.Volume.find_positionlaser">
+<code class="descname">find_positionlaser</code><span class="sig-paren">(</span><em>c</em>, <em>Nz</em>, <em>start=0</em>, <em>end=1</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Volume_LD.Volume.find_positionlaser" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Volume_LD.Volume.find_timejumps">
+<code class="descname">find_timejumps</code><span class="sig-paren">(</span><em>c</em>, <em>Dic</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Volume_LD.Volume.find_timejumps" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Volume_LD.Volume.get_im">
+<code class="descname">get_im</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Volume_LD.Volume.get_im" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Volume_LD.Volume.get_name">
+<code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Volume_LD.Volume.get_name" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">Le nom de l’objet, ici «&nbsp;Volume&nbsp;»</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Avertissement</p>
+<p class="last">Fonction nécessaire à toute les classes lors qu’on veut les convertir en hdf5</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Volume_LD.Volume.get_volume">
+<code class="descname">get_volume</code><span class="sig-paren">(</span><em>i</em>, <em>start=None</em>, <em>end=None</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Volume_LD.Volume.get_volume" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Volume_LD.Volume.save_volume">
+<code class="descname">save_volume</code><span class="sig-paren">(</span><em>savefolder</em>, <em>start=None</em>, <em>end=None</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Volume_LD.Volume.save_volume" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Une fois qu’on a la liste des volumes on souhaite créer un fichier HDF5 pour chaque volume</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Volume_LD.Volume.volume">
+<code class="descname">volume</code><span class="sig-paren">(</span><em>nb_im=None</em>, <em>nmin=5</em>, <em>dtmax=10</em>, <em>instant=None</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Volume_LD.Volume.volume" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">Objet Volume avec dans le dictionnaire m, «&nbsp;instantV&nbsp;», «&nbsp;tV&nbsp;», «&nbsp;CV&nbsp;»</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.mesure.Volume_LD.Volume.volume_2d">
+<code class="descname">volume_2d</code><span class="sig-paren">(</span><em>nb_im=None</em>, <em>nmin=5</em>, <em>dtmax=10</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.Volume_LD.Volume.volume_2d" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">Objet Volume contenant dans le dictionnaire m, un «&nbsp;instant&nbsp;»</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-lea.mesure.pre_traitement">
+<span id="lea-mesure-pre-traitement-module"></span><h2>lea.mesure.pre_traitement module<a class="headerlink" href="#module-lea.mesure.pre_traitement" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.charge_image_ram">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">charge_image_ram</code><span class="sig-paren">(</span><em>fichier</em>, <em>Dic</em>, <em>extension</em>, <em>nb_im=20</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.charge_image_ram" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Cette fonction charge une ou plusieurs images dans la ram</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fichier</strong> (<em>Adresse de l'image</em>) – Une ou plusieurs images</li>
+<li><strong>Dic</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(disponible dans Python v3.7)"><em>dict</em></a>) – Dictionnaire devant contenir toutes les informations</li>
+<li><strong>nb_im</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Nombre d’image du dossier à charger dans la ram</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.charge_video_ram">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">charge_video_ram</code><span class="sig-paren">(</span><em>fichier</em>, <em>Dic</em>, <em>nb_im=20</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.charge_video_ram" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Cette fonction charge une vidéo dans la ram</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fichier</strong> (<em>Adresse de la vidéo</em>) – Vidéo</li>
+<li><strong>Dic</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(disponible dans Python v3.7)"><em>dict</em></a>) – Dictionnaire devant contenir toutes les informations</li>
+<li><strong>nb_im</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Nombre d’image de la vidéà à charger dans la ram</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.crop">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">crop</code><span class="sig-paren">(</span><em>Dic</em>, <em>im</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.crop" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Crop une image avec xymin, xymax</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.define_axes_center">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">define_axes_center</code><span class="sig-paren">(</span><em>Dic</em>, <em>im</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.define_axes_center" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.get_H_and_L">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">get_H_and_L</code><span class="sig-paren">(</span><em>Dic</em>, <em>mesure</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.get_H_and_L" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Récupère la hauteur et la largeur soit de l’image soit de la vidéo.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.get_data_param">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">get_data_param</code><span class="sig-paren">(</span><em>Dic</em>, <em>mesure</em>, <em>fx</em>, <em>fps</em>, <em>D</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.get_data_param" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Récupère le fx, ft, D depuis Data s’ils existent sinon il prend ceux passé en paramètres.
+Le D doit être en mm, il est donc convertit si nécessaire</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.get_im_files">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">get_im_files</code><span class="sig-paren">(</span><em>fichier</em>, <em>num</em>, <em>extension</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.get_im_files" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">Image numéro num dans un fichier</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.get_im_video">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">get_im_video</code><span class="sig-paren">(</span><em>video</em>, <em>num</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.get_im_video" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">l’image numéro num dans une vidéo</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.image_to_array">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">image_to_array</code><span class="sig-paren">(</span><em>Dic</em>, <em>im</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.image_to_array" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Passe une image PIL en np array</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.in_dict">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">in_dict</code><span class="sig-paren">(</span><em>Dic</em>, <em>thetamin</em>, <em>thetamax</em>, <em>rmax</em>, <em>rmin</em>, <em>B</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.in_dict" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Met dans le dictionnaire les dernières informations nécessaires</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.load_im">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">load_im</code><span class="sig-paren">(</span><em>im</em>, <em>Dic</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.load_im" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Récupère une image et lance : image_to_array, crop et define_axes_center</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.plus_petit">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">plus_petit</code><span class="sig-paren">(</span><em>file1</em>, <em>file2</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.plus_petit" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.redefine_center">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">redefine_center</code><span class="sig-paren">(</span><em>Dic</em>, <em>DF</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.redefine_center" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Pour la classe <a class="reference internal" href="#module-lea.mesure.Contour" title="lea.mesure.Contour"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lea.mesure.Contour</span></code></a> on a besoin de redéfinir le centre à chaque tour pour suivre le ballon</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.redefine_rmax">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">redefine_rmax</code><span class="sig-paren">(</span><em>Dic</em>, <em>DF</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.redefine_rmax" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Pour la classe <a class="reference internal" href="#module-lea.mesure.Contour" title="lea.mesure.Contour"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lea.mesure.Contour</span></code></a> on a besoin de redéfinir le rmax à chaque tour pour suivre le ballon</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.set_axes">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">set_axes</code><span class="sig-paren">(</span><em>Dic</em>, <em>x0</em>, <em>y0</em>, <em>xmin</em>, <em>xmax</em>, <em>ymin</em>, <em>ymax</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.set_axes" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Pour crop l’image il faut en premier vérifier que les x,ymin, x,ymax, x,y0 soient corrects</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.mesure.pre_traitement.tri_insertion">
+<code class="descclassname">lea.mesure.pre_traitement.</code><code class="descname">tri_insertion</code><span class="sig-paren">(</span><em>liste</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.mesure.pre_traitement.tri_insertion" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-lea.exemple.mesure_exemple">
+<span id="exemple-mesure"></span><h2>Exemple Mesure<a class="headerlink" href="#module-lea.exemple.mesure_exemple" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="creation-de-mesure">
+<h3>Creation de Mesure<a class="headerlink" href="#creation-de-mesure" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Création d’un objet Mesure</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lea.data.Data</span> <span class="k">as</span> <span class="nn">ldata</span>
+<span class="kn">import</span> <span class="nn">lea.mesure.Mesure</span> <span class="k">as</span> <span class="nn">lmesure</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">ldata</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="n">fichier</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">heure</span><span class="o">=</span><span class="n">heure</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">lmesure</span><span class="o">.</span><span class="n">Mesure</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Création d’un objet Bulles et lancement de la fonction <code class="xref py py-func docutils literal notranslate"><span class="pre">lea.mesure.Bulles.bulle()</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lea.data.Data</span> <span class="k">as</span> <span class="nn">ldata</span>
+<span class="kn">import</span> <span class="nn">lea.mesure.Mesure</span> <span class="k">as</span> <span class="nn">lmesure</span>
+<span class="kn">import</span> <span class="nn">lea.mesure.Bulles</span> <span class="k">as</span> <span class="nn">lBulle</span>
+<span class="kn">import</span> <span class="nn">lea.hdf5.h5py_convert</span> <span class="k">as</span> <span class="nn">lh5py</span>
+
+<span class="n">folder</span> <span class="o">=</span> <span class="s2">&quot;/home/ldupuy/Documents/&quot;</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">ldata</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="n">fichier</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">heure</span><span class="o">=</span><span class="n">heure</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">lmesure</span><span class="o">.</span><span class="n">Mesure</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">lBulle</span><span class="o">.</span><span class="n">Bulle</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_measurement</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">lh5py</span><span class="o">.</span><span class="n">file_name_in_dir</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
+<span class="n">lh5py</span><span class="o">.</span><span class="n">obj_in_h5py</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">b</span><span class="o">.</span><span class="n">bulle</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">p_im</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nb_im</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Création d’un objet Contour, lancement d’une fonction de calcul et sauvegarde en HDF5</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lea.data.Data</span> <span class="k">as</span> <span class="nn">ldata</span>
+<span class="kn">import</span> <span class="nn">lea.mesure.Mesure</span> <span class="k">as</span> <span class="nn">lmesure</span>
+<span class="kn">import</span> <span class="nn">lea.mesure.Contour</span> <span class="k">as</span> <span class="nn">lContour</span>
+<span class="kn">import</span> <span class="nn">lea.hdf5.h5py_convert</span> <span class="k">as</span> <span class="nn">lh5py</span>
+
+<span class="n">folder</span> <span class="o">=</span> <span class="s2">&quot;/home/ldupuy/Documents/&quot;</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">ldata</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="n">fichier</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">heure</span><span class="o">=</span><span class="n">heure</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">lmesure</span><span class="o">.</span><span class="n">Mesure</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">lContour</span><span class="o">.</span><span class="n">Contour</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">contour_instant</span><span class="p">(</span><span class="n">fx</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">im_save</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">adresse_s</span><span class="o">=</span><span class="n">folder</span><span class="p">)</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">add_measurement</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">lh5py</span><span class="o">.</span><span class="n">file_name_in_dir</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
+<span class="n">lh5py</span><span class="o">.</span><span class="n">obj_in_h5py</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Création d’un objet Piv3D, lancement d’une fonction de calcul et sauvegarde en HDF5</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lea.data.Data</span> <span class="k">as</span> <span class="nn">ldata</span>
+<span class="kn">import</span> <span class="nn">lea.mesure.Mesure</span> <span class="k">as</span> <span class="nn">lmesure</span>
+<span class="kn">import</span> <span class="nn">lea.mesure.Piv3D</span> <span class="k">as</span> <span class="nn">lpiv</span>
+<span class="kn">import</span> <span class="nn">lea.hdf5.h5py_convert</span> <span class="k">as</span> <span class="nn">lh5py</span>
+
+<span class="n">folder</span> <span class="o">=</span> <span class="s2">&quot;/home/ldupuy/Documents/&quot;</span>
+<span class="n">cinename</span> <span class="o">=</span> <span class="s2">&quot;test1.cine&quot;</span>
+<span class="n">adresse_s</span> <span class="o">=</span> <span class="n">folder</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">ldata</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="n">fichier</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">heure</span><span class="o">=</span><span class="n">heure</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">lmesure</span><span class="o">.</span><span class="n">Mesure</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">lpiv</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">analysis_multi_proc</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">cinename</span><span class="p">,</span> <span class="n">adresse_s</span><span class="p">)</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">add_measurement</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">lh5py</span><span class="o">.</span><span class="n">file_name_in_dir</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
+<span class="n">lh5py</span><span class="o">.</span><span class="n">obj_in_h5py</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Création d’un Volume, lancement d’une fonction de calcul et sauvegarde en HDF5</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lea.data.Data</span> <span class="k">as</span> <span class="nn">ldata</span>
+<span class="kn">import</span> <span class="nn">lea.mesure.Mesure</span> <span class="k">as</span> <span class="nn">lmesure</span>
+<span class="kn">import</span> <span class="nn">lea.mesure.Volume</span> <span class="k">as</span> <span class="nn">lvolume</span>
+<span class="kn">import</span> <span class="nn">lea.hdf5.h5py_convert</span> <span class="k">as</span> <span class="nn">lh5py</span>
+
+<span class="n">folder</span> <span class="o">=</span> <span class="s2">&quot;/home/ldupuy/Documents/&quot;</span>
+<span class="n">cinename</span> <span class="o">=</span> <span class="s2">&quot;test1.cine&quot;</span>
+<span class="n">adresse_s</span> <span class="o">=</span> <span class="n">folder</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">ldata</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="n">fichier</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">heure</span><span class="o">=</span><span class="n">heure</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">lmesure</span><span class="o">.</span><span class="n">Mesure</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">lvolume</span><span class="o">.</span><span class="n">Volume</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">volume</span><span class="p">()</span>
+<span class="n">v</span><span class="o">.</span><span class="n">save_volume</span><span class="p">(</span><span class="n">folder</span> <span class="o">+</span> <span class="s2">&quot;Volume/&quot;</span><span class="p">)</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">add_measurement</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">lh5py</span><span class="o">.</span><span class="n">file_name_in_dir</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
+<span class="n">lh5py</span><span class="o">.</span><span class="n">obj_in_h5py</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">lea.mesure package</a><ul>
+<li><a class="reference internal" href="#module-lea.mesure.Mesure">lea.mesure.Mesure module</a></li>
+<li><a class="reference internal" href="#module-lea.mesure.Bulles">lea.mesure.Bulles module</a></li>
+<li><a class="reference internal" href="#module-lea.mesure.Contour">lea.mesure.Contour module</a></li>
+<li><a class="reference internal" href="#module-lea.mesure.Piv3D">lea.mesure.Piv3D module</a></li>
+<li><a class="reference internal" href="#module-lea.mesure.Volume_LD">lea.mesure.Volume_LD module</a></li>
+<li><a class="reference internal" href="#module-lea.mesure.pre_traitement">lea.mesure.pre_traitement module</a></li>
+<li><a class="reference internal" href="#module-lea.exemple.mesure_exemple">Exemple Mesure</a><ul>
+<li><a class="reference internal" href="#creation-de-mesure">Creation de Mesure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Sujet précédent</h4>
+  <p class="topless"><a href="lea.hdf5.html"
+                        title="Chapitre précédent">lea.hdf5 package</a></p>
+  <h4>Sujet suivant</h4>
+  <p class="topless"><a href="lea.exemple.html"
+                        title="Chapitre suivant">lea.exemple package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>Cette page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/lea.mesure.rst.txt"
+            rel="nofollow">Montrer le code source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lea.exemple.html" title="lea.exemple package"
+             >suivant</a> |</li>
+        <li class="right" >
+          <a href="lea.hdf5.html" title="lea.hdf5 package"
+             >précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Documentation Databook 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="lea.html" >lea package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Lea Dupuy.
+      Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
+    </div>
+  </body>
+</html>

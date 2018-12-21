@@ -1,0 +1,394 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>lea.data package &#8212; Documentation Databook 1.0</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="lea.display package" href="lea.display.html" />
+    <link rel="prev" title="lea.danjruth package" href="lea.danjruth.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lea.display.html" title="lea.display package"
+             accesskey="N">suivant</a> |</li>
+        <li class="right" >
+          <a href="lea.danjruth.html" title="lea.danjruth package"
+             accesskey="P">précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Documentation Databook 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="lea.html" accesskey="U">lea package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lea-data-package">
+<h1>lea.data package<a class="headerlink" href="#lea-data-package" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="module-lea.data.Data">
+<span id="lea-data-data-module"></span><h2>lea.data.data module<a class="headerlink" href="#module-lea.data.Data" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="class">
+<dt id="lea.data.Data.Data">
+<em class="property">class </em><code class="descclassname">lea.data.Data.</code><code class="descname">Data</code><span class="sig-paren">(</span><em>fichier</em>, <em>param</em>, <em>spec</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Data.Data" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Bases : <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(disponible dans Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fichier</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(disponible dans Python v3.7)"><em>dict</em></a><em> or </em><em>adresse</em>) – Passage en paramètre de la vidéo/image à traiter, ou dictionnaire contenant ses informations</li>
+<li><strong>param</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(disponible dans Python v3.7)"><em>dict</em></a><em> or </em><em>adresse</em>) – Nécessaire à la création de l’objet Param</li>
+<li><strong>spec</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(disponible dans Python v3.7)"><em>list</em></a><em> or </em><em>adresse</em>) – Nécessaire à la création de l’objet Param</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="lea.data.Data.Data.get_im_ref">
+<code class="descname">get_im_ref</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Data.Data.get_im_ref" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">Renvoie l’image PIL de référence</td>
+</tr>
+</tbody>
+</table>
+<p>Pour savoir comment l’affichier ou la sauvegarder aller voir : PIL</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.data.Data.Data.get_name">
+<code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Data.Data.get_name" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">Le nom de l’objet, ici «&nbsp;Data&nbsp;»</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Avertissement</p>
+<p class="last">Fonction nécessaire à toute les classes lors qu’on veut les convertir en hdf5</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.data.Data.Data.redefinir">
+<code class="descname">redefinir</code><span class="sig-paren">(</span><em>attr</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Data.Data.redefinir" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.data.Data.get_extension">
+<code class="descclassname">lea.data.Data.</code><code class="descname">get_extension</code><span class="sig-paren">(</span><em>fichier</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Data.get_extension" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-lea.data.Param">
+<span id="lea-data-param-module"></span><h2>lea.data.param module<a class="headerlink" href="#module-lea.data.Param" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="class">
+<dt id="lea.data.Param.Param">
+<em class="property">class </em><code class="descclassname">lea.data.Param.</code><code class="descname">Param</code><span class="sig-paren">(</span><em>p</em>, <em>spec</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Param.Param" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Bases : <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(disponible dans Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(disponible dans Python v3.7)"><em>dict</em></a><em> or </em><em>adresse</em>) – Sert à mettre les paramètres en attribut</li>
+<li><strong>spec</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(disponible dans Python v3.7)"><em>list</em></a><em> or </em><em>adresse</em>) – Sert à donner les informations supplémentaire dans une liste</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="lea.data.Param.Param.from_dict">
+<code class="descname">from_dict</code><span class="sig-paren">(</span><em>dic</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Param.Param.from_dict" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>dic</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(disponible dans Python v3.7)"><em>dict</em></a>) – Dictionnaire récupéré de l’__init__</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body">Rien mais met tout les attributs avec les valeurs présente dans le dictionnaire passé en paramètre.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.data.Param.Param.from_file">
+<code class="descname">from_file</code><span class="sig-paren">(</span><em>fichier</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Param.Param.from_file" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>fichier</strong> (<em>fichier</em>) – Adresse récupéré de l’__init__</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body">Rien mais met tout les attributs avec les valeurs présentes dans le fichier passé en paramètre</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Avertissement</p>
+<p class="last">Le nom du paramètre et sa valeur doivent être séparé d’une tabulation</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.data.Param.Param.get_name">
+<code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Param.Param.get_name" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">Le nom de l’objet, ici «&nbsp;Param&nbsp;»</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Avertissement</p>
+<p class="last">Fonction nécessaire à toute les classes lors qu’on veut les convertir en hdf5</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="lea.data.Param.Param.spec_file">
+<code class="descname">spec_file</code><span class="sig-paren">(</span><em>fichier</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Param.Param.spec_file" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>fichier</strong> (<em>fichier</em>) – Adresse récupéré de l’__init__ (spec)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body">Rien mais met les attributs présent dans le titre du fichier passé en paramètre</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Avertissement</p>
+<p class="last">Dans le titre tout les attributs doivent être séparé d’un underscore («&nbsp;_&nbsp;»)</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Pour qu’une information soit mise en tant que paramètre elle ne doit pas contenir que des nombres ni ne contenir que des lettres et ne commence pas par une lettre</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.data.Param.define_type">
+<code class="descclassname">lea.data.Param.</code><code class="descname">define_type</code><span class="sig-paren">(</span><em>strg</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Param.define_type" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">La valeur une fois convertit</td>
+</tr>
+</tbody>
+</table>
+<p>Convertit les valeurs qui sont récupéré depuis le fichier texte.
+Essaie de la convertir en int, sinon en float.
+Si jamais c’est un string la fonction essaie de convertir les valeurs (k, minch, inch, mV)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.data.Param.extract_param">
+<code class="descclassname">lea.data.Param.</code><code class="descname">extract_param</code><span class="sig-paren">(</span><em>str</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Param.extract_param" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-lea.data.Id">
+<span id="lea-data-id-module"></span><h2>lea.data.id module<a class="headerlink" href="#module-lea.data.Id" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="class">
+<dt id="lea.data.Id.Id">
+<em class="property">class </em><code class="descclassname">lea.data.Id.</code><code class="descname">Id</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Id.Id" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Bases : <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(disponible dans Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.7)"><em>int</em></a>) – Sert à reconnaitre deux Data crée le même jour</li>
+<li><strong>typ</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(disponible dans Python v3.7)"><em>str</em></a>) – Quelle est le type d’expérimentation faite</li>
+<li><strong>who</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(disponible dans Python v3.7)"><em>str</em></a>) – Personne ayant pris le Data</li>
+<li><strong>date</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(disponible dans Python v3.7)"><em>str</em></a>) – Date quand l’expérience a été réalisé</li>
+<li><strong>heure</strong> – variable plus utilisée</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="lea.data.Id.Id.check_date">
+<code class="descname">check_date</code><span class="sig-paren">(</span><em>date</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Id.Id.check_date" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.data.Id.Id.check_heure">
+<code class="descname">check_heure</code><span class="sig-paren">(</span><em>heure</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Id.Id.check_heure" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.data.Id.Id.gen">
+<code class="descname">gen</code><span class="sig-paren">(</span><em>index=1</em>, <em>typ='Non spécifié'</em>, <em>who='SPerrard'</em>, <em>date=''</em>, <em>heure=''</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Id.Id.gen" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lea.data.Id.Id.get_name">
+<code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.data.Id.Id.get_name" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Renvoie:</th><td class="field-body">Le nom de l’objet, ici «&nbsp;Id&nbsp;»</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Avertissement</p>
+<p class="last">Fonction nécessaire à toute les classes lors qu’on veut les convertir en hdf5</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-lea.exemple.data_exemple">
+<span id="exemple-data"></span><h2>Exemple Data<a class="headerlink" href="#module-lea.exemple.data_exemple" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="creation-de-data">
+<h3>Creation de Data<a class="headerlink" href="#creation-de-data" title="Lien permanent vers ce titre">¶</a></h3>
+<p>How to create a data object</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lea.data.Data</span> <span class="k">as</span> <span class="nn">ldata</span>
+
+<span class="c1">#Create a data object from a cinefile</span>
+<span class="n">fichier</span> <span class="o">=</span> <span class="s2">&quot;/home/ldupuy/Documents/test1.cine&quot;</span>
+<span class="n">param</span> <span class="o">=</span> <span class="s2">&quot;/home/ldupuy/Documents/test1_param.txt&quot;</span>
+<span class="c1">#On met spec à param pour avoir les informations dans le titre</span>
+<span class="n">spec</span> <span class="o">=</span> <span class="n">param</span>
+<span class="n">date</span> <span class="o">=</span> <span class="s2">&quot;20181220&quot;</span>
+<span class="n">heure</span> <span class="o">=</span> <span class="s2">&quot;0000&quot;</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">ldata</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="n">fichier</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">heure</span><span class="o">=</span><span class="n">heure</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="import-de-data">
+<h3>Import de Data<a class="headerlink" href="#import-de-data" title="Lien permanent vers ce titre">¶</a></h3>
+<p>How to import a data object from an hdf5 files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lea.data.Data</span> <span class="k">as</span> <span class="nn">ldata</span>
+<span class="kn">import</span> <span class="nn">lea.hdf5.h5py_convert</span> <span class="k">as</span> <span class="nn">lh5py</span>
+
+<span class="n">datafile</span> <span class="o">=</span> <span class="s2">&quot;/home/ldupuy/Documents/20181220_1_test1.hdf5&quot;</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">lh5py</span><span class="o">.</span><span class="n">ouverture_fichier</span><span class="p">(</span><span class="n">datafile</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">lh5py</span><span class="o">.</span><span class="n">h5py_in_Data</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">lea.data package</a><ul>
+<li><a class="reference internal" href="#module-lea.data.Data">lea.data.data module</a></li>
+<li><a class="reference internal" href="#module-lea.data.Param">lea.data.param module</a></li>
+<li><a class="reference internal" href="#module-lea.data.Id">lea.data.id module</a></li>
+<li><a class="reference internal" href="#module-lea.exemple.data_exemple">Exemple Data</a><ul>
+<li><a class="reference internal" href="#creation-de-data">Creation de Data</a></li>
+<li><a class="reference internal" href="#import-de-data">Import de Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Sujet précédent</h4>
+  <p class="topless"><a href="lea.danjruth.html"
+                        title="Chapitre précédent">lea.danjruth package</a></p>
+  <h4>Sujet suivant</h4>
+  <p class="topless"><a href="lea.display.html"
+                        title="Chapitre suivant">lea.display package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>Cette page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/lea.data.rst.txt"
+            rel="nofollow">Montrer le code source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lea.display.html" title="lea.display package"
+             >suivant</a> |</li>
+        <li class="right" >
+          <a href="lea.danjruth.html" title="lea.danjruth package"
+             >précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Documentation Databook 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="lea.html" >lea package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Lea Dupuy.
+      Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
+    </div>
+  </body>
+</html>
