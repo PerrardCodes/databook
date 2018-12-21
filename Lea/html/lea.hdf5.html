@@ -1,0 +1,448 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>lea.hdf5 package &#8212; Documentation Databook 1.0</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="lea.mesure package" href="lea.mesure.html" />
+    <link rel="prev" title="lea.display package" href="lea.display.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lea.mesure.html" title="lea.mesure package"
+             accesskey="N">suivant</a> |</li>
+        <li class="right" >
+          <a href="lea.display.html" title="lea.display package"
+             accesskey="P">précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Documentation Databook 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="lea.html" accesskey="U">lea package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lea-hdf5-package">
+<h1>lea.hdf5 package<a class="headerlink" href="#lea-hdf5-package" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="module-lea.hdf5.h5py_convert">
+<span id="lea-hdf5-h5py-convert-module"></span><h2>lea.hdf5.h5py_convert module<a class="headerlink" href="#module-lea.hdf5.h5py_convert" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="function">
+<dt id="lea.hdf5.h5py_convert.creation_utilisateur">
+<code class="descclassname">lea.hdf5.h5py_convert.</code><code class="descname">creation_utilisateur</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.h5py_convert.creation_utilisateur" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Création d’un Data depuis le terminal</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.h5py_convert.cstr">
+<code class="descclassname">lea.hdf5.h5py_convert.</code><code class="descname">cstr</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.h5py_convert.cstr" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonction de decodage</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.h5py_convert.file_name_in_dir">
+<code class="descclassname">lea.hdf5.h5py_convert.</code><code class="descname">file_name_in_dir</code><span class="sig-paren">(</span><em>object</em>, <em>adresse</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.h5py_convert.file_name_in_dir" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonction qui permet de créer un fichier hdf5 avec le bon nom et au bon endroit</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>object</strong> (<a class="reference internal" href="lea.data.html#lea.data.Data.Data" title="lea.data.Data.Data"><em>Data</em></a><em> or </em><em>Mesure</em>) – Permet de créer le nom grâce à l’id, la date, le nom du fichier</li>
+<li><strong>adresse</strong> (<em>adresse absolue</em>) – Endroit où créer le fichier</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body"><p class="first last">Files object (from h5py package)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.h5py_convert.h5py_in_Bulles">
+<code class="descclassname">lea.hdf5.h5py_convert.</code><code class="descname">h5py_in_Bulles</code><span class="sig-paren">(</span><em>f</em>, <em>data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.h5py_convert.h5py_in_Bulles" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>f</strong> (<em>Files h5py</em>) – Fichier ouvert</li>
+<li><strong>data</strong> (<em>Data Object</em>) – Un objet Data qui vient de Mesure</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body"><p class="first last">Bulles Object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Elle n’a pas été testé autrement que depuis <a class="reference internal" href="#lea.hdf5.h5py_convert.h5py_in_Mesure" title="lea.hdf5.h5py_convert.h5py_in_Mesure"><code class="xref py py-func docutils literal notranslate"><span class="pre">h5py_in_Mesure()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.h5py_convert.h5py_in_Contour">
+<code class="descclassname">lea.hdf5.h5py_convert.</code><code class="descname">h5py_in_Contour</code><span class="sig-paren">(</span><em>f</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.h5py_convert.h5py_in_Contour" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>f</strong> (<em>Files h5py</em>) – Fichier ouvert</li>
+<li><strong>data</strong> (<em>Data Object</em>) – Un objet Data qui vient de Mesure</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body"><p class="first last">Contour Object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Elle n’a pas été testé autrement que depuis <a class="reference internal" href="#lea.hdf5.h5py_convert.h5py_in_Mesure" title="lea.hdf5.h5py_convert.h5py_in_Mesure"><code class="xref py py-func docutils literal notranslate"><span class="pre">h5py_in_Mesure()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.h5py_convert.h5py_in_Data">
+<code class="descclassname">lea.hdf5.h5py_convert.</code><code class="descname">h5py_in_Data</code><span class="sig-paren">(</span><em>f</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.h5py_convert.h5py_in_Data" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Prend en paramètre un fichier HDF5 et renvoie le fichier Data qui est dedans</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>f</strong> (<em>Files h5py</em>) – Fichier ouvert</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body">Data Object</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Avertissement</p>
+<p class="last">Ne marche pas récursivement ! Le sous-dossier Data doit être à la racine.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Si le fichier HDF5 contient un objet Mesure il faut utiliser <a class="reference internal" href="#lea.hdf5.h5py_convert.h5py_in_Mesure" title="lea.hdf5.h5py_convert.h5py_in_Mesure"><code class="xref py py-func docutils literal notranslate"><span class="pre">h5py_in_Mesure()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.h5py_convert.h5py_in_Mesure">
+<code class="descclassname">lea.hdf5.h5py_convert.</code><code class="descname">h5py_in_Mesure</code><span class="sig-paren">(</span><em>f</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.h5py_convert.h5py_in_Mesure" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>f</strong> (<em>Files h5py</em>) – Fichier ouvert</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body">Mesure Object</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>Si jamais le fichier a un sous dossier Contour il va appeler <a class="reference internal" href="#lea.hdf5.h5py_convert.h5py_in_Contour" title="lea.hdf5.h5py_convert.h5py_in_Contour"><code class="xref py py-func docutils literal notranslate"><span class="pre">h5py_in_Contour()</span></code></a></li>
+<li>Si jamais le fichier a un sous dossier Bulles il va appeler <a class="reference internal" href="#lea.hdf5.h5py_convert.h5py_in_Bulles" title="lea.hdf5.h5py_convert.h5py_in_Bulles"><code class="xref py py-func docutils literal notranslate"><span class="pre">h5py_in_Bulles()</span></code></a></li>
+<li>Si jamais le fichier a un sous dossier PIV3D il va appeler <a class="reference internal" href="#lea.hdf5.h5py_convert.h5py_in_piv3d" title="lea.hdf5.h5py_convert.h5py_in_piv3d"><code class="xref py py-func docutils literal notranslate"><span class="pre">h5py_in_piv3d()</span></code></a></li>
+<li>Si jamais le fichier a un sous dossier Volume il va appeler <a class="reference internal" href="#lea.hdf5.h5py_convert.h5py_in_Volume" title="lea.hdf5.h5py_convert.h5py_in_Volume"><code class="xref py py-func docutils literal notranslate"><span class="pre">h5py_in_Volume()</span></code></a></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.h5py_convert.h5py_in_Volume">
+<code class="descclassname">lea.hdf5.h5py_convert.</code><code class="descname">h5py_in_Volume</code><span class="sig-paren">(</span><em>f</em>, <em>data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.h5py_convert.h5py_in_Volume" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>f</strong> (<em>Files h5py</em>) – Fichier ouvert</li>
+<li><strong>data</strong> (<em>Data Object</em>) – Un objet Data qui vient de Mesure</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body"><p class="first last">Volume Object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Elle n’a pas été testé autrement que depuis <a class="reference internal" href="#lea.hdf5.h5py_convert.h5py_in_Mesure" title="lea.hdf5.h5py_convert.h5py_in_Mesure"><code class="xref py py-func docutils literal notranslate"><span class="pre">h5py_in_Mesure()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.h5py_convert.h5py_in_piv3d">
+<code class="descclassname">lea.hdf5.h5py_convert.</code><code class="descname">h5py_in_piv3d</code><span class="sig-paren">(</span><em>f</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.h5py_convert.h5py_in_piv3d" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>f</strong> (<em>Files h5py</em>) – Fichier ouvert</li>
+<li><strong>data</strong> (<em>Data Object</em>) – Un objet Data qui vient de Mesure</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body"><p class="first last">Piv3d Object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Elle n’a pas été testé autrement que depuis <a class="reference internal" href="#lea.hdf5.h5py_convert.h5py_in_Mesure" title="lea.hdf5.h5py_convert.h5py_in_Mesure"><code class="xref py py-func docutils literal notranslate"><span class="pre">h5py_in_Mesure()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.h5py_convert.obj_in_h5py">
+<code class="descclassname">lea.hdf5.h5py_convert.</code><code class="descname">obj_in_h5py</code><span class="sig-paren">(</span><em>object</em>, <em>file</em>, <em>group=None</em>, <em>point=''</em>, <em>attr=''</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.h5py_convert.obj_in_h5py" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>object</strong> (<em>Python Object</em>) – Objet à transférer en HDF5</li>
+<li><strong>file</strong> – fichier dans lequel il faut sauvegarder le fichier hdf5</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Ecrit l’objet dans le fichier au furt et à mesure qu’il descent récursivement dans l’objets passé en paramètre.</p>
+<p>Necessite l’utilisation de <a class="reference internal" href="#lea.hdf5.h5py_convert.ouverture_fichier" title="lea.hdf5.h5py_convert.ouverture_fichier"><code class="xref py py-func docutils literal notranslate"><span class="pre">ouverture_fichier()</span></code></a> ou de <a class="reference internal" href="#lea.hdf5.h5py_convert.file_name_in_dir" title="lea.hdf5.h5py_convert.file_name_in_dir"><code class="xref py py-func docutils literal notranslate"><span class="pre">file_name_in_dir()</span></code></a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Les paramètres group, point, attr sont utilisés pour les récursions.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.h5py_convert.ouverture_fichier">
+<code class="descclassname">lea.hdf5.h5py_convert.</code><code class="descname">ouverture_fichier</code><span class="sig-paren">(</span><em>name</em>, <em>mode='r'</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.h5py_convert.ouverture_fichier" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(disponible dans Python v3.7)"><em>str</em></a>) – Nom du fichier HDF5</li>
+<li><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(disponible dans Python v3.7)"><em>str</em></a>) – Mode d’ouverture du fichier</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body"><p class="first last">Fichier HDF5 ouvert</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Pour plus d’information sur les modes il faut aller voir :
+<a class="reference external" href="http://docs.h5py.org/en/stable/high/file.html">h5py</a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lea.hdf5.routine">
+<span id="lea-hdf5-routine-module"></span><h2>lea.hdf5.routine module<a class="headerlink" href="#module-lea.hdf5.routine" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="function">
+<dt id="lea.hdf5.routine.convert_arbo">
+<code class="descclassname">lea.hdf5.routine.</code><code class="descname">convert_arbo</code><span class="sig-paren">(</span><em>ref</em>, <em>adresse_s</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.routine.convert_arbo" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Convertit récursivement tout les fichiers (.jpg, .png, .tif, .cine) en fichier HDF5</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>ref</strong> – Adresse du dossier parent</li>
+<li><strong>adresse_s</strong> – Adresse où on sauvegarde les fichiers hdf5</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Renvoie:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.routine.convert_dir">
+<code class="descclassname">lea.hdf5.routine.</code><code class="descname">convert_dir</code><span class="sig-paren">(</span><em>adresse</em>, <em>adresse_s</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.routine.convert_dir" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ref</strong> – Adresse du dossier parent</li>
+<li><strong>name_dir</strong> – Nom du dossier courant</li>
+<li><strong>adresse</strong> – ref + «&nbsp;/&nbsp;» + name_dir</li>
+<li><strong>adresse_s</strong> – Adresse où l’on sauvegarde les fichiers hdf5</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.routine.convert_files">
+<code class="descclassname">lea.hdf5.routine.</code><code class="descname">convert_files</code><span class="sig-paren">(</span><em>adresse</em>, <em>adresse_s</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.routine.convert_files" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ref</strong> – Adresse du dossier parent</li>
+<li><strong>name_dir</strong> – Nom du dossier courant</li>
+<li><strong>adresse</strong> – ref + «&nbsp;/&nbsp;» + name_dir</li>
+<li><strong>adresse_s</strong> – Adresse où l’on sauvegarde les fichiers hdf5</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.routine.errase_dir">
+<code class="descclassname">lea.hdf5.routine.</code><code class="descname">errase_dir</code><span class="sig-paren">(</span><em>ref</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.routine.errase_dir" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.routine.extract_param">
+<code class="descclassname">lea.hdf5.routine.</code><code class="descname">extract_param</code><span class="sig-paren">(</span><em>str</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.routine.extract_param" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.routine.get_extention">
+<code class="descclassname">lea.hdf5.routine.</code><code class="descname">get_extention</code><span class="sig-paren">(</span><em>fichier</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.routine.get_extention" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.routine.get_param">
+<code class="descclassname">lea.hdf5.routine.</code><code class="descname">get_param</code><span class="sig-paren">(</span><em>adresse</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.routine.get_param" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.routine.is_cine">
+<code class="descclassname">lea.hdf5.routine.</code><code class="descname">is_cine</code><span class="sig-paren">(</span><em>liste</em>, <em>adresse</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.routine.is_cine" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.routine.plus_petit">
+<code class="descclassname">lea.hdf5.routine.</code><code class="descname">plus_petit</code><span class="sig-paren">(</span><em>file1</em>, <em>file2</em>, <em>adresse</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.routine.plus_petit" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.routine.tiff">
+<code class="descclassname">lea.hdf5.routine.</code><code class="descname">tiff</code><span class="sig-paren">(</span><em>adresse</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.routine.tiff" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="lea.hdf5.routine.tri_insertion">
+<code class="descclassname">lea.hdf5.routine.</code><code class="descname">tri_insertion</code><span class="sig-paren">(</span><em>liste</em>, <em>adresse</em><span class="sig-paren">)</span><a class="headerlink" href="#lea.hdf5.routine.tri_insertion" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">lea.hdf5 package</a><ul>
+<li><a class="reference internal" href="#module-lea.hdf5.h5py_convert">lea.hdf5.h5py_convert module</a></li>
+<li><a class="reference internal" href="#module-lea.hdf5.routine">lea.hdf5.routine module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Sujet précédent</h4>
+  <p class="topless"><a href="lea.display.html"
+                        title="Chapitre précédent">lea.display package</a></p>
+  <h4>Sujet suivant</h4>
+  <p class="topless"><a href="lea.mesure.html"
+                        title="Chapitre suivant">lea.mesure package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>Cette page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/lea.hdf5.rst.txt"
+            rel="nofollow">Montrer le code source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lea.mesure.html" title="lea.mesure package"
+             >suivant</a> |</li>
+        <li class="right" >
+          <a href="lea.display.html" title="lea.display package"
+             >précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Documentation Databook 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="lea.html" >lea package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Lea Dupuy.
+      Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
+    </div>
+  </body>
+</html>
